@@ -79,16 +79,33 @@
 
 
 
-<meta name="description" content="ReactNative、React、JavaScript、Android、Python、小程序">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Code change the World">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="语音交互是现今应用最多的智能交互方式，在人工智能越来越火的当下应用十分广泛，所以特别针对车内环境，在驾驶员安心驾驶的时候，用语音可以安全的进行操控。恰好新版项目中要加入语音播报功能，因为我们的应用和司机有关，于是在网上搜索一些解决方案，目前有阿里云，百度云以及科大讯飞还有一些其他公司提供的相关解决方案。不同方案之间的对比，可以参考下面的文章：智能语音方案比对介绍http://www.jianshu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative集成百度语音合成">
+<meta property="og:url" content="http://yoursite.com/2018/10/31/ReactNative集成百度语音合成/index.html">
 <meta property="og:site_name" content="Code change the World">
-<meta property="og:description" content="ReactNative、React、JavaScript、Android、Python、小程序">
+<meta property="og:description" content="语音交互是现今应用最多的智能交互方式，在人工智能越来越火的当下应用十分广泛，所以特别针对车内环境，在驾驶员安心驾驶的时候，用语音可以安全的进行操控。恰好新版项目中要加入语音播报功能，因为我们的应用和司机有关，于是在网上搜索一些解决方案，目前有阿里云，百度云以及科大讯飞还有一些其他公司提供的相关解决方案。不同方案之间的对比，可以参考下面的文章：智能语音方案比对介绍http://www.jianshu">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-b4a33d488eea8fd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-805498c45751537a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-316e4c8e2b820498.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-5f61cc4542f0b2bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-606981925949b433.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-bfbd47fbe363c5eb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-cb5ece9ecc86b6dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-c5a97e9c267cd32a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-6ad66a964a818c0b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-f4fe4dab3372e1e9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-bafb78d1f831a774.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-3cca14ada84e5d57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-ad3119354d17757a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-5141dc64b2ab574c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/3112038-977360e0c2f0618d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-10-31T09:13:08.018Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Code change the World">
-<meta name="twitter:description" content="ReactNative、React、JavaScript、Android、Python、小程序">
+<meta name="twitter:title" content="ReactNative集成百度语音合成">
+<meta name="twitter:description" content="语音交互是现今应用最多的智能交互方式，在人工智能越来越火的当下应用十分广泛，所以特别针对车内环境，在驾驶员安心驾驶的时候，用语音可以安全的进行操控。恰好新版项目中要加入语音播报功能，因为我们的应用和司机有关，于是在网上搜索一些解决方案，目前有阿里云，百度云以及科大讯飞还有一些其他公司提供的相关解决方案。不同方案之间的对比，可以参考下面的文章：智能语音方案比对介绍http://www.jianshu">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/3112038-b4a33d488eea8fd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -118,13 +135,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/10/31/ReactNative集成百度语音合成/">
 
 
 
 
 
-  <title>Code change the World</title>
+  <title>ReactNative集成百度语音合成 | Code change the World</title>
   
 
 
@@ -153,8 +170,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -247,9 +263,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -279,9 +295,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/ReactNative集成百度语音合成/" itemprop="url">ReactNative集成百度语音合成</a></h1>
+          <h1 class="post-title" itemprop="name headline">ReactNative集成百度语音合成</h1>
         
 
         <div class="post-meta">
@@ -331,9 +345,7 @@
       
 
       
-        
-          
-            <p>语音交互是现今应用最多的智能交互方式，在人工智能越来越火的当下应用十分广泛，所以特别针对车内环境，在驾驶员安心驾驶的时候，用语音可以安全的进行操控。恰好新版项目中要加入语音播报功能，因为我们的应用和司机有关，于是在网上搜索一些解决方案，目前有阿里云，百度云以及科大讯飞还有一些其他公司提供的相关解决方案。<br>不同方案之间的对比，可以参考下面的文章：<br><a href="http://blog.csdn.net/rui1605/article/details/74391341" target="_blank" rel="noopener">智能语音方案比对介绍</a><br><a href="http://www.jianshu.com/p/95d95f8189aa" target="_blank" rel="noopener">http://www.jianshu.com/p/95d95f8189aa</a></p>
+        <p>语音交互是现今应用最多的智能交互方式，在人工智能越来越火的当下应用十分广泛，所以特别针对车内环境，在驾驶员安心驾驶的时候，用语音可以安全的进行操控。恰好新版项目中要加入语音播报功能，因为我们的应用和司机有关，于是在网上搜索一些解决方案，目前有阿里云，百度云以及科大讯飞还有一些其他公司提供的相关解决方案。<br>不同方案之间的对比，可以参考下面的文章：<br><a href="http://blog.csdn.net/rui1605/article/details/74391341" target="_blank" rel="noopener">智能语音方案比对介绍</a><br><a href="http://www.jianshu.com/p/95d95f8189aa" target="_blank" rel="noopener">http://www.jianshu.com/p/95d95f8189aa</a></p>
 <p>目前计划采用的是百度云提供的语音合成技术：<br>有如下几个优势：</p>
 <p>1.支持多种语言多种音色<br>支持中文、英文混读，男声、女声、童声、情感男声可供选择，更支持语速、音调、音量、音频码率设置，让应用拥有最甜美和最磁性的声音<br>2.支持离线在线融合模式<br>SDK可以根据当前网络状况及指令的类型，自动判断使用本地引擎还是云端引擎进行语音合成<br>3.合成效果流畅自然<br>语音合成技术业界领先，合成效果接近<br>真人发声，流畅自然，且极具表现力，<br>给你最舒适的听觉体验<br>4.免费额度高</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/3112038-b4a33d488eea8fd8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
@@ -372,8 +384,6 @@
 <p>Oc 百度语音的ios集成:<a href="http://blog.csdn.net/qq_40691827/article/details/78333380" target="_blank" rel="noopener">http://blog.csdn.net/qq_40691827/article/details/78333380</a><br>iOS 一行代码简单调用百度语音合成:<a href="http://www.jianshu.com/p/1c4a3f248098" target="_blank" rel="noopener">http://www.jianshu.com/p/1c4a3f248098</a></p>
 <p>ps:使用Android原生自带的语音合成：<br><a href="https://github.com/SolveBugs/Utils/blob/master/SpeechUtils.java" target="_blank" rel="noopener">https://github.com/SolveBugs/Utils/blob/master/SpeechUtils.java</a><br><a href="https://blog.csdn.net/csdn_blog_lcl/article/details/52504323" target="_blank" rel="noopener">https://blog.csdn.net/csdn_blog_lcl/article/details/52504323</a></p>
 
-          
-        
       
     </div>
     
@@ -390,135 +400,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/ReactNative仿支付宝付款密码输入框/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Wayne214">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Code change the World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/10/31/ReactNative仿支付宝付款密码输入框/" itemprop="url">ReactNative仿支付宝付款密码输入框</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T16:11:57+08:00">
-                2018-10-31
-              </time>
+              <a href="/2018/10/31/ReactNative仿支付宝付款密码输入框/" rel="next" title="ReactNative仿支付宝付款密码输入框">
+                <i class="fa fa-chevron-left"></i> ReactNative仿支付宝付款密码输入框
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>接触RN差不多三个月了，发布一个仿支付宝付款密码的输入框控件，一直都是在使用大神们发布的控件，收益良多，现在发布第一个控件，也是基于一位大神写的控件，站在巨人肩膀上，在此感谢，文中有大神封装的链接，大家可以看看，学习npm发布的步骤，也增加了自己学习的自信心和动力。以后工作中会逐渐发布一些自己写的库，还忘朋友们多多支持。</p>
-<p>react-native-password-pay<br>采用React Native开发，仿支付宝付款密码输入框,借鉴了大神封装的类库，在此表示感谢<a href="https://github.com/chenchunyong/react-native-passwordInput%EF%BC%8C%E9%87%87%E7%94%A8ES6%E8%AF%AD%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%94%B9%E5%86%99" target="_blank" rel="noopener">https://github.com/chenchunyong/react-native-passwordInput，采用ES6语法进行改写</a><br><a href="https://github.com/wayne214/react-native-password-pay/raw/master/password.png" target="_blank" rel="noopener"><img src="https://github.com/wayne214/react-native-password-pay/raw/master/password.png" alt="仿支付宝密码输入框"></a><br>Install<br>安装包:<br>npm i react-native-password-pay –save</p>
-<p>通过引用import Password from ‘react-native-password-pay’<br>来使用<br>Demo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;View&gt; </span><br><span class="line">&lt;Password maxLength=&#123;6&#125;&gt;&lt;/Password&gt; </span><br><span class="line">&lt;/View&gt;</span><br></pre></td></tr></table></figure></p>
-<p>其中maxLength={6}<br>表示需要输入6位数密码</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -528,10 +431,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -539,6 +443,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -744,6 +652,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
