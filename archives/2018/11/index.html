@@ -732,7 +732,7 @@
   
   <script type="text/javascript">
     var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
+    var guest = 'nick,mail,';
     guest = guest.split(',').filter(item=>{
       return GUEST.indexOf(item)>-1;
     });
@@ -742,8 +742,8 @@
         notify: false,
         appId: 'Cpn8ogH3e6KOcLxNz2vFIbjc-gzGzoHsz',
         appKey: 'DrQGXvCVUce7jpv4L5itPE94',
-        placeholder: 'Just go go',
-        avatar:'mm',
+        placeholder: '😊老铁，你不想说两句吗？',
+        avatar:'wavatar',
         guest_info:guest,
         pageSize:'10' || 10,
     });
