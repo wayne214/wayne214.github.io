@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="ReactNative,">
 
 
 
@@ -79,19 +79,20 @@
 
 
 
-<meta name="description" content="接触RN差不多三个月了，发布一个仿支付宝付款密码的输入框控件，一直都是在使用大神们发布的控件，收益良多，现在发布第一个控件，也是基于一位大神写的控件，站在巨人肩膀上，在此感谢，文中有大神封装的链接，大家可以看看，学习npm发布的步骤，也增加了自己学习的自信心和动力。以后工作中会逐渐发布一些自己写的库，还忘朋友们多多支持。">
+<meta name="description" content="众所周知，React-Native原生的Webview的属性onShouldStartLoadWithRequest仅支持IOS平台，但是往往在开发中两端都需要进行URl的拦截，进行对应的业务需要。通过不断学习，在https://github.com/react-native-community/react-native-webview的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需">
+<meta name="keywords" content="ReactNative">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ReactNative仿支付宝付款密码输入框">
-<meta property="og:url" content="http://yoursite.com/2018/10/31/ReactNative仿支付宝付款密码输入框/index.html">
+<meta property="og:title" content="跨平台的Webview支持onShouldStartLoadWithRequest">
+<meta property="og:url" content="http://yoursite.com/2018/11/02/react-native-webview-crossplatform/index.html">
 <meta property="og:site_name" content="Code change the World">
-<meta property="og:description" content="接触RN差不多三个月了，发布一个仿支付宝付款密码的输入框控件，一直都是在使用大神们发布的控件，收益良多，现在发布第一个控件，也是基于一位大神写的控件，站在巨人肩膀上，在此感谢，文中有大神封装的链接，大家可以看看，学习npm发布的步骤，也增加了自己学习的自信心和动力。以后工作中会逐渐发布一些自己写的库，还忘朋友们多多支持。">
+<meta property="og:description" content="众所周知，React-Native原生的Webview的属性onShouldStartLoadWithRequest仅支持IOS平台，但是往往在开发中两端都需要进行URl的拦截，进行对应的业务需要。通过不断学习，在https://github.com/react-native-community/react-native-webview的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://github.com/wayne214/react-native-password-pay/raw/master/password.png">
-<meta property="og:updated_time" content="2018-11-01T02:34:49.280Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-dfb7c659888eb02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-11-02T04:13:48.040Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReactNative仿支付宝付款密码输入框">
-<meta name="twitter:description" content="接触RN差不多三个月了，发布一个仿支付宝付款密码的输入框控件，一直都是在使用大神们发布的控件，收益良多，现在发布第一个控件，也是基于一位大神写的控件，站在巨人肩膀上，在此感谢，文中有大神封装的链接，大家可以看看，学习npm发布的步骤，也增加了自己学习的自信心和动力。以后工作中会逐渐发布一些自己写的库，还忘朋友们多多支持。">
-<meta name="twitter:image" content="https://github.com/wayne214/react-native-password-pay/raw/master/password.png">
+<meta name="twitter:title" content="跨平台的Webview支持onShouldStartLoadWithRequest">
+<meta name="twitter:description" content="众所周知，React-Native原生的Webview的属性onShouldStartLoadWithRequest仅支持IOS平台，但是往往在开发中两端都需要进行URl的拦截，进行对应的业务需要。通过不断学习，在https://github.com/react-native-community/react-native-webview的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3112038-dfb7c659888eb02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/31/ReactNative仿支付宝付款密码输入框/">
+  <link rel="canonical" href="http://yoursite.com/2018/11/02/react-native-webview-crossplatform/">
 
 
 
 
 
-  <title>ReactNative仿支付宝付款密码输入框 | Code change the World</title>
+  <title>跨平台的Webview支持onShouldStartLoadWithRequest | Code change the World</title>
   
 
 
@@ -269,12 +270,12 @@
   
   
 
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  <article class="post post-type-ReactNative" itemscope="" itemtype="http://schema.org/Article">
   
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/31/ReactNative仿支付宝付款密码输入框/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/02/react-native-webview-crossplatform/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wayne214">
@@ -291,7 +292,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ReactNative仿支付宝付款密码输入框</h2>
+          <h2 class="post-title" itemprop="name headline">跨平台的Webview支持onShouldStartLoadWithRequest</h2>
         
 
         <div class="post-meta">
@@ -303,8 +304,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T16:11:57+08:00">
-                2018-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-02T12:08:36+08:00">
+                2018-11-02
               </time>
             
 
@@ -322,8 +323,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/31/ReactNative仿支付宝付款密码输入框/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/10/31/ReactNative仿支付宝付款密码输入框/" itemprop="commentCount"></span>
+                <a href="/2018/11/02/react-native-webview-crossplatform/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/11/02/react-native-webview-crossplatform/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -356,9 +357,11 @@
       
 
       
-        <p>接触RN差不多三个月了，发布一个仿支付宝付款密码的输入框控件，一直都是在使用大神们发布的控件，收益良多，现在发布第一个控件，也是基于一位大神写的控件，站在巨人肩膀上，在此感谢，文中有大神封装的链接，大家可以看看，学习npm发布的步骤，也增加了自己学习的自信心和动力。以后工作中会逐渐发布一些自己写的库，还忘朋友们多多支持。<br><a id="more"></a><br>react-native-password-pay<br>采用React Native开发，仿支付宝付款密码输入框,借鉴了大神封装的类库，在此表示感谢<a href="https://github.com/chenchunyong/react-native-passwordInput%EF%BC%8C%E9%87%87%E7%94%A8ES6%E8%AF%AD%E6%B3%95%E8%BF%9B%E8%A1%8C%E6%94%B9%E5%86%99" target="_blank" rel="noopener">https://github.com/chenchunyong/react-native-passwordInput，采用ES6语法进行改写</a><br><a href="https://github.com/wayne214/react-native-password-pay/raw/master/password.png" target="_blank" rel="noopener"><img src="https://github.com/wayne214/react-native-password-pay/raw/master/password.png" alt="仿支付宝密码输入框"></a><br>Install<br>安装包:<br>npm i react-native-password-pay –save</p>
-<p>通过引用import Password from ‘react-native-password-pay’<br>来使用<br>Demo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;View&gt; </span><br><span class="line">&lt;Password maxLength=&#123;6&#125;&gt;&lt;/Password&gt; </span><br><span class="line">&lt;/View&gt;</span><br></pre></td></tr></table></figure></p>
-<p>其中maxLength={6}<br>表示需要输入6位数密码</p>
+        <p>众所周知，React-Native原生的Webview的属性onShouldStartLoadWithRequest仅支持IOS平台，但是往往在开发中两端都需要进行URl的拦截，进行对应的业务需要。<br><img src="https://upload-images.jianshu.io/upload_images/3112038-dfb7c659888eb02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="webview.png"><br>通过不断学习，在<a href="https://github.com/react-native-community/react-native-webview的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需要的可以参考一下。https://github.com/wayne214/react-native-webview-crossplatform,欢迎star,fork" target="_blank" rel="noopener">https://github.com/react-native-community/react-native-webview的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需要的可以参考一下。https://github.com/wayne214/react-native-webview-crossplatform,欢迎star,fork</a>.<br><a id="more"></a><br>使用方式如下：<br>1.添加依赖包</p>
+<blockquote>
+<p>yarn add react-native-webview-crossplatform<br>react-native link react-native-webview-crossplatform</p>
+</blockquote>
+<p>2.在需要的业务页面导入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">import &#123; WebView &#125; from &apos;react-native-webview-crossplatform&apos;</span><br><span class="line">export default class webview extends Component&lt;Props&gt; &#123;</span><br><span class="line">    constructor(props)&#123;</span><br><span class="line">        super(props);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;View style=&#123;styles.container&#125;&gt;</span><br><span class="line">          &lt;WebView</span><br><span class="line">              source=&#123;&#123; uri: &apos;https://infinite.red/react-native&apos; &#125;&#125;</span><br><span class="line">              style=&#123;&#123; marginTop: 20 &#125;&#125;</span><br><span class="line">              onLoadProgress=&#123;e=&gt;console.log(e.nativeEvent.progress)&#125;</span><br><span class="line">              onShouldStartLoadWithRequest=&#123;(e)=&gt; &#123;</span><br><span class="line">                  console.log(&apos;拦截&apos;, e)</span><br><span class="line">                  return true</span><br><span class="line">              &#125;&#125;</span><br><span class="line">              renderError=&#123;()=&gt; &#123;</span><br><span class="line">                  return &lt;View&gt;</span><br><span class="line">                      &lt;Text&gt;我是错误页面&lt;/Text&gt;</span><br><span class="line">                  &lt;/View&gt;</span><br><span class="line">              &#125;&#125;</span><br><span class="line">          /&gt;</span><br><span class="line">      &lt;/View&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -413,6 +416,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ReactNative/" rel="tag"># ReactNative</a>
+          
+        </div>
+      
 
       
       
@@ -422,15 +431,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/10/31/ReactNative集成百度语音合成/" rel="next" title="ReactNative集成百度语音合成">
+                <i class="fa fa-chevron-left"></i> ReactNative集成百度语音合成
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/31/ReactNative集成百度语音合成/" rel="prev" title="ReactNative集成百度语音合成">
-                ReactNative集成百度语音合成 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -841,9 +850,9 @@ var jiathis_config={
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://yoursite.com/2018/10/31/ReactNative仿支付宝付款密码输入框/';
-          this.page.identifier = '2018/10/31/ReactNative仿支付宝付款密码输入框/';
-          this.page.title = 'ReactNative仿支付宝付款密码输入框';
+          this.page.url = 'http://yoursite.com/2018/11/02/react-native-webview-crossplatform/';
+          this.page.identifier = '2018/11/02/react-native-webview-crossplatform/';
+          this.page.title = '跨平台的Webview支持onShouldStartLoadWithRequest';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://.disqus.com/embed.js';
