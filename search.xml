@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[好用到炸的ReactNaitveUI库]]></title>
+    <url>%2F2018%2F11%2F19%2F%E5%A5%BD%E7%94%A8%E5%88%B0%E7%82%B8%E7%9A%84ReactNaitveUI%E5%BA%93%2F</url>
+    <content type="text"><![CDATA[1.### Beeshell 一个 React Native 应用的基础组件库，基于 0.53.3 版本，提供一整套开箱即用的高质量组件，包含 JS 组件和复合组件（包含 Native 代码），涉及 FE、iOS、Android 三端技术，兼顾通用性和定制化，支持自定义主题，用于开发和服务企业级移动 2.#Teaset React Native UI 组件库, 超过 20 个纯 JS(ES6) 组件, 专注于内容展示和操作控制 3.react-native-ui-lib 4.Ant Design MobileAnt Design 移动端设计规范。antd-mobile 是 Ant Design 的移动规范的 React 实现，服务于蚂蚁及口碑无线业务。 特性 基于 Ant Design 移动设计规范。 规则化的视觉样式配置，适应各类产品风格。 使用 TypeScript 开发，提供类型定义文件。 5.NativeBaseEssential cross-platform UI components for React Native 6.react-native-elements React Native ElementsCross Platform React Native UI Toolkit]]></content>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[react-native升级0.56注意问题]]></title>
+    <url>%2F2018%2F11%2F13%2Freact-native%E5%8D%87%E7%BA%A70-56%2F</url>
+    <content type="text"><![CDATA[当前项目react-native的版本是0.53.3，因为最近在做一系列性能优化的工作，于是计划升级一下RN的版本，升级至0.56.0。先看一下ReactNative0.56.0版本更新的内容：https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#056步骤及遇到的问题如下： 1.使用https://reactnative.cn/docs/upgrading/中基于Git的自动合并更新方式：首先全局安装react-native-git-upgrade工具模块：1$ npm install -g react-native-git-upgrade 2.接下来进行更新操作1234567$ react-native-git-upgrade# 这样会直接把react native升级到最新版本# 或者是：$ react-native-git-upgrade X.Y.Z# 这样把react native升级到指定的X.Y.Z版本 那么更新到0.56.0就是1$ react-naitve-git-update 0.56.0 3.等待升级结束后，需要解决冲突, 下面的这些文件的冲突都需要进行解决一下 1234567891011121314151617181920212223文件中的冲突会以分隔线隔开，并清楚的标记出处，例如下面这样：13B07F951A680F5B00A75B9A /* Release */ = &#123; isa = XCBuildConfiguration; buildSettings = &#123; ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;&lt;&lt;&lt;&lt;&lt;&lt;&lt; ours CODE_SIGN_IDENTITY = &quot;iPhone Developer&quot;; FRAMEWORK_SEARCH_PATHS = ( &quot;$(inherited)&quot;, &quot;$(PROJECT_DIR)/HockeySDK.embeddedframework&quot;, &quot;$(PROJECT_DIR)/HockeySDK-iOS/HockeySDK.embeddedframework&quot;, );======= CURRENT_PROJECT_VERSION = 1;&gt;&gt;&gt;&gt;&gt;&gt;&gt; theirs HEADER_SEARCH_PATHS = ( &quot;$(inherited)&quot;, /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include, &quot;$(SRCROOT)/../node_modules/react-native/React/**&quot;, &quot;$(SRCROOT)/../node_modules/react-native-code-push/ios/CodePush/**&quot;, );上面代码中的&quot;ours&quot;表示你自己的代码，而&quot;theirs&quot;表示 React Native 的官方代码。然后你可以根据实际情况判断，选择某一方晋级，另一方出局。 注意问题一、0.56.0以上的RN使用Babel 7 React Native now uses Babel 7When upgrading to 0.56, make sure to bump your babel-preset-react-native package.json dependency to 5.0.2 or newer (but still as fixed value).React Native 现在使用 Babel 7，升级到 0.56 后，请确保将 babel-preset-react-native package.json 依赖项升级到 ^5.0.2 或更高版本。那么就需要升级一下babel-preset-react-native版本1yarn add babel-preset-react-native@5.0.2 --dev 二、升级后遇到react native version mismatch问题 参考了https://stackoverflow.com/questions/47763824/react-native-version-mismatch中的解决方案：1.IOS进入项目中：1cd ios &amp;&amp; pod install 12345For others with the same problem on iOS with CocoaPods:I tried all of the solutions above, without luck. I have some packages with native dependencies in my project, and some of those needed pod modules being installed. The problem was that React was specified in my Podfile, but the React pod didn&apos;t automatically get upgraded by using react-native-git-upgrade.The fix is to upgrade all installed pods, by running cd ios &amp;&amp; pod install. 2.Android 第三方库使用的buildToolsVersion版本太低，不需要手动修改库内容，在android/build.gradle中添加以下内容，强制所有依赖使用相同版本。 12345678910subprojects &#123; afterEvaluate &#123;project -&gt; if (project.hasProperty(&quot;android&quot;)) &#123; android &#123; compileSdkVersion 26 buildToolsVersion &apos;26.0.3&apos; &#125; &#125; &#125;&#125; 其他升级问题可参考这篇文章,也可在评论区与我进行沟通。ReactNative从0.47 升级到0.56遇到的问题]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>ReactNative</tag>
+        <tag>前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[reactnative小白入门教程-搭建开发环境]]></title>
+    <url>%2F2018%2F11%2F08%2Freactnative%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B-%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[俗话说“工欲善其事，必先利其器”，这对咱们程序猿来说更是如此，强大的开发利器，不仅有助于我们提高开发效率，更能够让我们的开发过程变的舒心。这里我墙裂推荐大家配置一个Mac Book Pro,这简直是程序开发者的神奇。免费打个广告吧：https://item.jd.com/7842699.html, 现在适逢双11，更有优惠活动。正式进入主题。 配置开发环境这里直接推荐ReactNative中文网的配置说明：https://reactnative.cn/docs/getting-started.html 开发IDE响应平台开发软件： Xcode，Android StudioGit命令行优化：item命令控制面板配色这里推荐大家使用WebStorm 进行ReactNative的开发，非常强大的IDE，智能提醒，语法高亮等。使用Windows系统的小伙伴，配置开发环境可参考这篇文章：React Native开发一 webstorm搭建React Native开发环境 注意事项！！！注意！！！：init 命令默认会创建最新的版本，而目前最新的 0.45 及以上版本需要下载 boost 等几个第三方库编译。这些库在国内即便翻墙也很难下载成功，导致很多人无法运行iOS项目！！！中文网在论坛中提供了这些库的国内下载链接。如果你嫌麻烦，又没有对新版本的需求，那么可以暂时创建0.44.3的版本。1react-native init youprogectname 开在如下表中选择相应的版本号，进行创建项目，比如1react-native init reactnativeDemo --version 0.44.3 提示：你可以使用–version参数（注意是两个杠）创建指定版本的项目。例如react-native init MyApp –version 0.44.3。注意版本号必须精确到两个小数点。 如果在配置环境的过程中，遇到什么问题，可以在博客下方评论区给我留言，我会第一时间进行回复。]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React-Native小白入门教程-前言]]></title>
+    <url>%2F2018%2F11%2F08%2Freactnative%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1%2F</url>
+    <content type="text"><![CDATA[从17年3月份开始接触ReactNative的开发到现在已经差不多一年半的时间了，在这一年多的时间里，完成从零到壹的过程，也使用ReactNative完成了6、7个APP的开发工作。期间踩了无数的坑，现在打算从零开始写一下怎么入门ReactNative开发。 教程目录索引：ReactNative小白入门教程-搭建开发环境 关于ReactNativeReact Native (简称RN)是Facebook于2015年4月开源的跨平台移动应用开发框架，是Facebook早先开源的JS框架 React 在原生移动应用平台的衍生产物，目前支持iOS和安卓两大平台。RN使用Javascript语言，类似于HTML的JSX，以及CSS来开发移动应用，因此熟悉Web前端开发的技术人员只需很少的学习就可以进入移动应用开发领域。 React Native使你能够在Javascript和React的基础上获得完全一致的开发体验，构建世界一流的原生APP。 React Native着力于提高多平台开发的开发效率 —— 仅需学习一次，编写任何平台。(Learn once, write anywhere) ReactNative的发展现状RN作为一款跨平台的开发框架，得到了国内很多公司的支持和使用，比如BATJ都有很多业务采用了RN的方案。RN的版本在稳步的不断迭代，不断修复bug, 丰富插件支持，有更加良好的生态环境，以及十分活跃的开发社区，在github2018年统计的开源项目中，Rn位列第二，仅次于微软的vscode，有理由项目Rn的未来发展将越来越好。有关链接： https://mp.weixin.qq.com/s/S0df_3mm_TOrCVQFcgRmSQ ReactNative重构路线图https://www.oschina.net/news/97129/state-of-react-native-2018https://www.oschina.net/news/101455/react-native-roadmap-2018 后续会推出ReactNative开发入门的系列文章，欢迎关注。]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Android之Activity生命周期]]></title>
+    <url>%2F2018%2F11%2F05%2FAndroid%E4%B9%8BActivity%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
+    <content type="text"><![CDATA[官方Activity生命周期图例： 知识点回顾：1.onStart和onResume,onPause和noStop，从功能描述上差不多，有什么区别？onStart和onStop是从Activity是否可见这个角度回调的，而onResume和onPause是从Activity是否位于前台这个角度来回调的。2.假设当前Activity为A ，如果此时打开了一个新的ActivityB,那么是B的onResume和A的onPause那个先执行？答： 是旧的的Activity先onPause, 然后新Activity再启动。3.当使用ApplicationContext启动standard模式的activity时会报错原因：因为standard模式的Activity会默认进入启动它的Activity任务栈中，但是非Activity类型的Context并没有所谓的任务栈。解决方案：对待启动的activity指定FLAG_ACTIVITY_NEW_TASK标记位，这样启动的时候就会为它创建一个新的任务栈，这时候待启动的Activity实际上是以singleTask模式启动的。 Tips: 系统只在Activity异常终止的时候才会调用onSaveInstanceState和onRestoreInstanceState来存错和恢复数据，其他情况不会触发这个过程。 如果设置了Activity的configeChanges属性，例如android:configChanges=”orientation|locale|keyboardHidden”,在横竖屏切换的时候，不会重新创建Activity，也就不会重新走Activity的生命周期。]]></content>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[2018年10款好用的PythonIDE]]></title>
+    <url>%2F2018%2F11%2F05%2F10%E6%AC%BE%E5%A5%BD%E7%94%A8%E7%9A%84PythonIDE%2F</url>
+    <content type="text"><![CDATA[Python 非常易学，强大的编程语言。Python 包括高效高级的数据结构，提供简单且高效的面向对象编程。Python 的学习过程少不了 IDE 或者代码编辑器，或者集成的开发编辑器（IDE）。这些 Python 开发工具帮助开发者加快使用 Python 开发的速度，提高效率。高效的代码编辑器或者 IDE 应该会提供插件，工具等能帮助开发者高效开发的特性。这篇文章收集了一些对开发者非常有帮助的，最好的 10 款 Python IDEs。如果你有其他更好的推荐，请在评论和大家分享一下：） VimVim 可以说是 Python 最好的 IDE。Vim 是高级文本编辑器，旨在提供实际的 Unix 编辑器’Vi’功能，支持更多更完善的特性集。Vim 不需要花费太多的学习时间，一旦你需要一个无缝的编程体验，那么就会把 Vim 集成到你的工作流中。 Eclipse with PyDevEclipse 是非常流行的 IDE，而且已经有了很久的历史。Eclipse with Pydev 允许开发者创建有用和交互式的 Web 应用。PyDev 是 Eclipse 开发 Python 的 IDE，支持 Python，Jython和 IronPython 的开发。 Sublime TextSublime Text 是开发者中最流行的编辑器之一，多功能，支持多种语言，而且在开发者社区非常受欢迎。Sublime 有自己的包管理器，开发者可以使用TA来安装组件，插件和额外的样式，所有这些都能提升你的编码体验。 EmacsGNU Emacs 是可扩展，自定义的文本编辑器，甚至是更多的功能。Emacs 的核心是 Emacs Lisp 解析器，但是支持文本编辑。如果你已经使用过 Vim，可以尝试一下 Emacs。 Komodo EditKomodo Edit 是非常干净，专业的 Python IDE。 PyCharmPyCharm 是 JetBrains 开发的 Python IDE。PyCharm用于一般IDE具备的功能，比如， 调试、语法高亮、Project管理、代码跳转、智能提示、自动完成、单元测试、版本控制……另外，PyCharm还提供了一些很好的功能用于Django开发，同时支持Google App Engine，更酷的是，PyCharm支持IronPython！ WingWingware 的 Python IDE 兼容 Python 2.x 和 3.x，可以结合 Django, matplotlib, Zope, Plone, App Engine, PyQt, PySide, wxPython, PyGTK, Tkinter, mod_wsgi, pygame, Maya, MotionBuilder, NUKE, Blender 和其他 Python 框架使用。Wing 支持测试驱动开发，集成了单元测试，nose 和 Django 框架的执行和调试功能。Wing IDE 启动和运行的速度都非常快，支持 Windows, Linux, OS X 和 Python versi。 PyScripterPyScripter 是款免费开源的 Python 集成开发环境（IDE）。 The Eric Python IDEEric 是全功能的 Python 和 Ruby 编辑器和 IDE，是使用 Python 编写的。Eric 基于跨平台的 GUI 工具包 Qt，集成了高度灵活的 Scintilla 编辑器控件。Eric 包括一个插件系统，允许简单的对 IDE 进行功能性扩展。 Interactive Editor for PythonIEP 是跨平台的 Python IDE，旨在提供简单高效的 Python 开发环境。包括两个重要的组件：编辑器和 Shell，并且提供插件工具集从各个方面来提高开发人员的效率。 11.有关其中几个IDE的配置，请参阅菜鸟教程中的文档：http://www.runoob.com/python/python-ide.html]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ReactNative文件读写操作]]></title>
+    <url>%2F2018%2F11%2F05%2Freactnative%E6%96%87%E4%BB%B6%E8%AF%BB%E5%86%99%E6%93%8D%E4%BD%9C%2F</url>
+    <content type="text"><![CDATA[最近公司项目要求进行定时上传位置信息，及埋点，因为使用的是RN开发，一开始就是想到在Android和Ios原生里进行操作。在原生里面实现了定时任务，Android里面使用的是broadcastReceive + service + timer实现了。现在需要生成一个日志文件，一开始想在原生里面进行实现文件的读写。后来查找相关资料，发现了一个不错的第三方插件，react-native-fs，现在记录一下，集成步骤及简单的文件读写操作。插件地址：https://github.com/itinance/react-native-fs自己写了个Demo进行了测试，目前没有什么问题,Demo地址https://github.com/wayne214/RNstudyDemo/blob/master/src/utils/readAndWriteFileUtil.js 1.集成安装命令：1npm install react-native-fs --save //注意：如果react native版本是&lt;0.40安装，使用此标签：1npm install react-native-fs@2.0.1-rc.2 --save 安装后执行：1react-native link react-native-fs Android添加相应权限12&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt; &lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt; 2.使用导入及设置文件存储路径 读写操作 删除文件 获取文件路径 判断文件路径是否存在 拷贝文件 创建目录/创建目录/ mkDir() { const options = { NSURLIsExcludedFromBackupKey: true, // iOS only }; return RNFS.mkdir(destPath, options) .then((res) =&gt; { console.log(&apos;MKDIR success&apos;); }).catch((err) =&gt; { console.log(&apos;err&apos;, err); }); }]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ReactNative之Image在Android设置圆角图片变形问题]]></title>
+    <url>%2F2018%2F11%2F02%2Freact-native-image%2F</url>
+    <content type="text"><![CDATA[ReactNative中的Image使用时比较简单的，比如下面这样：1234567&lt;Image resizeMode=&apos;contain&apos; defaultSource=&#123;require(&apos;images/avatar_placeholder.png&apos;)&#125; source=&#123;&#123; uri: &apos;http://img1.qimingpian.com/product/raw/2b7285ee83af426c321002e27247377a.jpg&apos; &#125;&#125; style=&#123;&#123;width: 50, height: 50&#125;&#125; /&gt; 效果就是这样了 问题来了，如果给Image设置了圆角了话，Android上就显示有问题了， 1234567891011&lt;Image resizeMode=&apos;contain&apos; defaultSource=&#123;require(&apos;images/avatar_placeholder.png&apos;)&#125; source=&#123;&#123; uri: &apos;http://img1.qimingpian.com/product/raw/2b7285ee83af426c321002e27247377a.jpg&apos; &#125;&#125; style=&#123;&#123; width: 50, height: 50, borderWidth: StyleSheet.hairlineWidth, borderRadius: 3, borderColor: color.STARUP.LINE_BACKGROUND&#125;&#125; /&gt; 就会出现下面的图片变形问题，图片在安卓手机上会出现多余的颜色 怎么解决他呢？如果需要给图片加圆角，解决方案如下： 1.Image不设置圆角，外面用View包裹一下，设置View的圆角12345678910111213&lt;View style=&#123;&#123; width: 50, height: 50, borderWidth: StyleSheet.hairlineWidth, borderRadius: 3, borderColor: color.STARUP.LINE_BACKGROUND&#125;&#125;&gt; &lt;Image resizeMode=&apos;contain&apos; defaultSource=&#123;require(&apos;images/avatar_placeholder.png&apos;)&#125; source=&#123;&#123; uri: &apos;http://img1.qimingpian.com/product/raw/2b7285ee83af426c321002e27247377a.jpg&apos; &#125;&#125; style=&#123;&#123;width: 50, height: 50,&#125;&#125; /&gt; &lt;/View&gt; ##2.设置overlayColor的颜色12345678910111213&lt;Image resizeMode=&apos;contain&apos; defaultSource=&#123;require(&apos;images/avatar_placeholder.png&apos;)&#125; source=&#123;&#123; uri: &apos;http://img1.qimingpian.com/product/raw/2b7285ee83af426c321002e27247377a.jpg&apos; &#125;&#125; style=&#123;&#123; width: 50, height: 50, borderWidth: StyleSheet.hairlineWidth, borderRadius: 3, borderColor: color.STARUP.LINE_BACKGROUND, overlayColor: &apos;#ffffff&apos; &#125;&#125; /&gt; ok,就酱自了。 都怪自己读书少，没好好看文档：]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[跨平台的Webview支持onShouldStartLoadWithRequest]]></title>
+    <url>%2F2018%2F11%2F02%2Freact-native-webview-crossplatform%2F</url>
+    <content type="text"><![CDATA[众所周知，React-Native原生的Webview的属性onShouldStartLoadWithRequest仅支持IOS平台，但是往往在开发中两端都需要进行URl的拦截，进行对应的业务需要。通过不断学习，在https://github.com/react-native-community/react-native-webview 的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需要的可以参考一下。https://github.com/wayne214/react-native-webview-crossplatform, 欢迎star,fork.使用方式如下：1.添加依赖包 yarn add react-native-webview-crossplatformreact-native link react-native-webview-crossplatform 2.在需要的业务页面导入12345678910111213141516171819202122232425262728import &#123; WebView &#125; from &apos;react-native-webview-crossplatform&apos;export default class webview extends Component&lt;Props&gt; &#123; constructor(props)&#123; super(props); &#125; render() &#123; return ( &lt;View style=&#123;styles.container&#125;&gt; &lt;WebView source=&#123;&#123; uri: &apos;https://infinite.red/react-native&apos; &#125;&#125; style=&#123;&#123; marginTop: 20 &#125;&#125; onLoadProgress=&#123;e=&gt;console.log(e.nativeEvent.progress)&#125; onShouldStartLoadWithRequest=&#123;(e)=&gt; &#123; console.log(&apos;拦截&apos;, e) return true &#125;&#125; renderError=&#123;()=&gt; &#123; return &lt;View&gt; &lt;Text&gt;我是错误页面&lt;/Text&gt; &lt;/View&gt; &#125;&#125; /&gt; &lt;/View&gt; ); &#125;&#125;]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ReactNative集成百度语音合成]]></title>
+    <url>%2F2018%2F10%2F31%2FReactNative%E9%9B%86%E6%88%90%E7%99%BE%E5%BA%A6%E8%AF%AD%E9%9F%B3%E5%90%88%E6%88%90%2F</url>
+    <content type="text"><![CDATA[语音交互是现今应用最多的智能交互方式，在人工智能越来越火的当下应用十分广泛，所以特别针对车内环境，在驾驶员安心驾驶的时候，用语音可以安全的进行操控。恰好新版项目中要加入语音播报功能，因为我们的应用和司机有关，于是在网上搜索一些解决方案，目前有阿里云，百度云以及科大讯飞还有一些其他公司提供的相关解决方案。不同方案之间的对比，可以参考下面的文章：智能语音方案比对介绍http://www.jianshu.com/p/95d95f8189aa 目前计划采用的是百度云提供的语音合成技术：有如下几个优势： 1.支持多种语言多种音色支持中文、英文混读，男声、女声、童声、情感男声可供选择，更支持语速、音调、音量、音频码率设置，让应用拥有最甜美和最磁性的声音2.支持离线在线融合模式SDK可以根据当前网络状况及指令的类型，自动判断使用本地引擎还是云端引擎进行语音合成3.合成效果流畅自然语音合成技术业界领先，合成效果接近真人发声，流畅自然，且极具表现力，给你最舒适的听觉体验4.免费额度高 好了，不给它打广告了，开始整干货，下面是集成步骤。先贴上百度云官网文档地址：http://ai.baidu.com/docs#/TTS-Android-SDK/top1.创建一个ReactNative工程，不会的自行百度吧；或者在已有项目中，总之你得有个RN项目2.登录网址百度语音开发者平台注册账号并创建应用：进入控制台–&gt;选择产品服务–&gt;选择人工智能–&gt;创建应用–&gt;填写有关应用信息 同理点击查看Key，查看当前应用的所需的主要三个参数 AppId APIKey SecretKey，后面会用得到. 3.下载相关平台的SDK 4.解压后 BaiduTtsSample:为一个模板代码，eclipse版本的，我就是借鉴里面稍微修改了一下。 data:为百度语音资源，声音文件，它为一个必须文件，中英文资源。最后使用是放在手机物理存储下的。 doc:为一个pdf的简介使用方法以及网络的使用Api文档说明。我们用不到，可以下去读一读的。 libs:为资源jar包和语音引擎文件.so库。也是我们集成必须使用到的。5.接下来的步骤是，我们将语音资源和libs下的资源方法android studio我们的项目里面。将data里面的文件全部复制到Asserts文件夹下。将libs下的两个jar文件复制到项目的libs中,并添加Add As library关联。在项目中的main路径下新建一个jnilibs文件夹，用于放置剩余的libs下的文件。现在的工程目录是(Android) 6.添加权限 7.到此，集成就结束了，接下来就是如何使用。当然可以参照BaiduTtsSample文件夹下的src里面的一个MainActvity的写法。也可以按照下面的总结的工具类来直接使用，方便快捷省事。参考文章：http://blog.csdn.net/bk120/article/details/54020505————————–华丽的分割线—————————-因为咱们的的项目是ReactNative，所以要进行原生和js的交互1.创建一个原生模块是一个继承了ReactContextBaseJavaModule的Java类，它可以实现一些JavaScript所需的功能。 2.注册模块 3.在这个package需要在MainApplication.java文件的getPackages方法中提供。这个文件位于你的react-native应用文件夹的android目录中。 4.为了让你的功能从JavaScript端访问起来更为方便，通常我们都会把原生模块封装成一个JavaScript模块。这不是必须的，但省下了每次都从NativeModules中获取对应模块的步骤。这个JS文件也可以用于添加一些其他JavaScript端实现的功能。 5.使用 6.集成常见问题：百度语音文档中心：http://yuyin.baidu.com/docs/tts/84 Oc 百度语音的ios集成:http://blog.csdn.net/qq_40691827/article/details/78333380iOS 一行代码简单调用百度语音合成:http://www.jianshu.com/p/1c4a3f248098 ps:使用Android原生自带的语音合成：https://github.com/SolveBugs/Utils/blob/master/SpeechUtils.javahttps://blog.csdn.net/csdn_blog_lcl/article/details/52504323]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[ReactNative仿支付宝付款密码输入框]]></title>
+    <url>%2F2018%2F10%2F31%2FReactNative%E4%BB%BF%E6%94%AF%E4%BB%98%E5%AE%9D%E4%BB%98%E6%AC%BE%E5%AF%86%E7%A0%81%E8%BE%93%E5%85%A5%E6%A1%86%2F</url>
+    <content type="text"><![CDATA[接触RN差不多三个月了，发布一个仿支付宝付款密码的输入框控件，一直都是在使用大神们发布的控件，收益良多，现在发布第一个控件，也是基于一位大神写的控件，站在巨人肩膀上，在此感谢，文中有大神封装的链接，大家可以看看，学习npm发布的步骤，也增加了自己学习的自信心和动力。以后工作中会逐渐发布一些自己写的库，还忘朋友们多多支持。react-native-password-pay采用React Native开发，仿支付宝付款密码输入框,借鉴了大神封装的类库，在此表示感谢https://github.com/chenchunyong/react-native-passwordInput，采用ES6语法进行改写Install安装包:npm i react-native-password-pay –save 通过引用import Password from ‘react-native-password-pay’来使用Demo123&lt;View&gt; &lt;Password maxLength=&#123;6&#125;&gt;&lt;/Password&gt; &lt;/View&gt; 其中maxLength={6}表示需要输入6位数密码]]></content>
+  </entry>
+</search>
