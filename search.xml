@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python包管理器-pip]]></title>
+    <url>%2F2018%2F11%2F20%2FPython%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%2F</url>
+    <content type="text"><![CDATA[pip 是 Python 包管理工具，该工具提供了对Python 包的查找、下载、安装、卸载的功能。 目前如果你在 python.org 下载最新版本的安装包，则是已经自带了该工具。 Python 2.7.9 + 或 Python 3.4+ 以上版本都自带 pip 工具。 pip 官网：https://pypi.org/project/pip/ 你可以通过以下命令来判断是否已安装：1pip --version 如果没有安装，可使用如下命令进行安装：12curl https://bootstrap.pypa.io/get-pip.py -o get-pip.pypython get-pip.py 注意： 注意：用哪个版本的 Python 运行安装脚本，pip 就被关联到哪个版本，如果是 Python3 则执行以下命令：$ sudo python3 get-pip.py # 运行安装脚本。一般情况 pip 对应的是 Python 2.7，pip3 对应的是 Python 3.x。 ##pip常用命令获取帮助1pip --help 查看版本及路径1pip --version 升级pip的版本1pip install --upgrade pip 安装包123pip install SomePackage # 最新版本pip install SomePackage==1.0.4 # 指定版本pip install &apos;SomePackage&gt;=1.0.4&apos; # 最小版本 升级包1pip install --upgrade SomePackage 卸载包1pip uninstall SomePackage 参看安装包信息1pip show 查看指定安装包信息1pip show -f SomePackage 搜索包1pip search SomePackage 列出已安装的包1pip list 查看可升级的包1pip list -o]]></content>
+      <tags>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[好用到炸的ReactNaitveUI库]]></title>
     <url>%2F2018%2F11%2F19%2F%E5%A5%BD%E7%94%A8%E5%88%B0%E7%82%B8%E7%9A%84ReactNaitveUI%E5%BA%93%2F</url>
     <content type="text"><![CDATA[1.### Beeshell 一个 React Native 应用的基础组件库，基于 0.53.3 版本，提供一整套开箱即用的高质量组件，包含 JS 组件和复合组件（包含 Native 代码），涉及 FE、iOS、Android 三端技术，兼顾通用性和定制化，支持自定义主题，用于开发和服务企业级移动 2.#Teaset React Native UI 组件库, 超过 20 个纯 JS(ES6) 组件, 专注于内容展示和操作控制 3.react-native-ui-lib 4.Ant Design MobileAnt Design 移动端设计规范。antd-mobile 是 Ant Design 的移动规范的 React 实现，服务于蚂蚁及口碑无线业务。 特性 基于 Ant Design 移动设计规范。 规则化的视觉样式配置，适应各类产品风格。 使用 TypeScript 开发，提供类型定义文件。 5.NativeBaseEssential cross-platform UI components for React Native 6.react-native-elements React Native ElementsCross Platform React Native UI Toolkit]]></content>
