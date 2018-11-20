@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[react-native-vector-icons报错问题]]></title>
+    <url>%2F2018%2F11%2F20%2Freact-native-vector-icons%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons` was found. However the module `dist/EvilIcons` could not be found within the package. Indeed, none of these files exist: * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)` * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons/index(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)` 解决问题第一大法，去github上找到这个项目的issues中，在https://github.com/oblador/react-native-vector-icons/issues/626中看到了解决方案：在项目的根目录下，执行一下如下代码就OK了1rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json]]></content>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[微信小程序调豆瓣接口api报403错误]]></title>
     <url>%2F2018%2F11%2F20%2F%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B0%83%E8%B1%86%E7%93%A3%E6%8E%A5%E5%8F%A3api%E6%8A%A5403%E9%94%99%E8%AF%AF%2F</url>
     <content type="text"><![CDATA[笔者最近在开始学习小程序的开发，参考的案例就是豆瓣读书demo,在学习中发现点击banner图看详情的时候，发现服务器返回了430错误，拒绝访问，这不是打消我的积极性嘛，度娘查找资料，终于发现了解决方法，特此记录一下。 将域名更换为https://douban.uieee.com 更换后可以看到已经拿到返回数据： 参考资料：https://blog.csdn.net/yw00yw/article/details/80930204]]></content>
