@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[微信小程序调豆瓣接口api报403错误]]></title>
+    <url>%2F2018%2F11%2F20%2F%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E8%B0%83%E8%B1%86%E7%93%A3%E6%8E%A5%E5%8F%A3api%E6%8A%A5403%E9%94%99%E8%AF%AF%2F</url>
+    <content type="text"><![CDATA[笔者最近在开始学习小程序的开发，参考的案例就是豆瓣读书demo,在学习中发现点击banner图看详情的时候，发现服务器返回了430错误，拒绝访问，这不是打消我的积极性嘛，度娘查找资料，终于发现了解决方法，特此记录一下。 将域名更换为https://douban.uieee.com 更换后可以看到已经拿到返回数据： 参考资料：https://blog.csdn.net/yw00yw/article/details/80930204]]></content>
+      <tags>
+        <tag>微信小程序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Python包管理器-pip]]></title>
     <url>%2F2018%2F11%2F20%2FPython%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8%2F</url>
     <content type="text"><![CDATA[pip 是 Python 包管理工具，该工具提供了对Python 包的查找、下载、安装、卸载的功能。 目前如果你在 python.org 下载最新版本的安装包，则是已经自带了该工具。 Python 2.7.9 + 或 Python 3.4+ 以上版本都自带 pip 工具。 pip 官网：https://pypi.org/project/pip/ 你可以通过以下命令来判断是否已安装：1pip --version 如果没有安装，可使用如下命令进行安装：12curl https://bootstrap.pypa.io/get-pip.py -o get-pip.pypython get-pip.py 注意： 注意：用哪个版本的 Python 运行安装脚本，pip 就被关联到哪个版本，如果是 Python3 则执行以下命令：$ sudo python3 get-pip.py # 运行安装脚本。一般情况 pip 对应的是 Python 2.7，pip3 对应的是 Python 3.x。 ##pip常用命令获取帮助1pip --help 查看版本及路径1pip --version 升级pip的版本1pip install --upgrade pip 安装包123pip install SomePackage # 最新版本pip install SomePackage==1.0.4 # 指定版本pip install &apos;SomePackage&gt;=1.0.4&apos; # 最小版本 升级包1pip install --upgrade SomePackage 卸载包1pip uninstall SomePackage 参看安装包信息1pip show 查看指定安装包信息1pip show -f SomePackage 搜索包1pip search SomePackage 列出已安装的包1pip list 查看可升级的包1pip list -o]]></content>
