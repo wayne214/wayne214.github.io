@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ReactNative入门教程-项目结构解析及HelloWorld]]></title>
+    <url>%2F2018%2F11%2F22%2FReactNative%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%A7%A3%E6%9E%90%E5%8F%8AHelloWorld%2F</url>
+    <content type="text"><![CDATA[今天我们从历史传统“Hello World”开始。 首先创建一个项目, 指定创建0.55.4的版本1react-native init rndemo --version 0.55.4 进入项目中，使用命令yarn install 安装依赖等待安装完成之后，进入项目根目录，使用如下命令运行到iOS或Android模拟器上，即可看到下面的画面，就表示运行项目成功了1react-native run-ios or run-android 项目的目录结构如下：咱们接下来逐一解释一下目录结构的组成部分： 项目结构解析 android: Android的原生开发文件目录，用Android Studio打开项目就是打开这个文件进行原生开发 ios: IOS原生开发目录，使用Xcode打开进行原生开发 node_modules: 使用“npm install”或者“yarn install”，根据项目中package.json配置自动生成的项目依赖库 .babelrc: Babel的配置文件,Babel是一个广泛使用的转码器，主要用来将ES6代码转为ES5代码，从而在现有环境执行。babelrc用来设置转码规则和插件。 .buckconfig: buck的配置文件，buck是Facebook推出的一款高效率的App项目构建工具。 .flowconfig: Flow 是 Facebook 旗下一个为 JavaScript 进行静态类型检测的检测工具。它可以在 JavaScript 的项目中用来捕获常见的 bugs，比如隐式类型转换，空引用等等。 .gitattributes: git属性文件设定一些项目特殊的属性。比如要比较word文档的不同；对strings程序进行注册；合并冲突的时候不想合并某些文件等等。 .gitignore: 用来配置git提交需要忽略的文件。 .watchmanconfig: 用于监控bug文件和文件变化，并且可以出发指定的操作。 App.js：就是编写代码的地方，稍后“hello world”就是在这里进行修改。 app.json: 配置了name和displayName，不过没发现在哪里使用到了。（待研究。。） index.js: iOS和Android项目的统一入口文件，可以在android的MainApplication中的ReactNativeHost中重写getJSMainModuleName()方法更改; 在Ios的AppDelegate.m文件的didFinishLaunchingWithOptions方法中通过jsBundleURLForBundleRoot可以更改入口文件。 package.json: package.json定义了项目所需要的各种模块，以及项目的配置信息（比如名称、版本、许可证等元数据）。npm install命令根据这个配置文件，自动下载所需的模块，也就是配置项目所需的运行和开发环境。 yarn.lock: Yarn 是 一个由 Facebook 创建的新 JavaScript 包管理器；每次添加依赖或者更新包版本，yarn都会把相关版本信息写入yarn.lock文件。这样可以解决同一个项目在不同机器上环境不一致的问题。 Hello World修改App.js文件如下：现在我们已经完成了Hello world， 是不是很简单呢？ 知识点 JSX javascript语法糖 ES6 组件(Component)：上面的代码定义了一个名为HelloWorldApp的新的组件（Component）。你在编写 React Native 应用时，肯定会写出很多新的组件。而一个 App 的最终界面，其实也就是各式各样的组件的组合。组件本身结构可以非常简单——唯一必须的就是在render方法中返回一些用于渲染结构的 JSX 语句]]></content>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[react-native-vector-icons报错问题]]></title>
     <url>%2F2018%2F11%2F20%2Freact-native-vector-icons%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons` was found. However the module `dist/EvilIcons` could not be found within the package. Indeed, none of these files exist: * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)` * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons/index(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)` 解决问题第一大法，去github上找到这个项目的issues中，在https://github.com/oblador/react-native-vector-icons/issues/626中看到了解决方案：在项目的根目录下，执行一下如下代码就OK了1rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json]]></content>
@@ -45,7 +53,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[reactnative小白入门教程-搭建开发环境]]></title>
+    <title><![CDATA[reactnative入门教程-搭建开发环境]]></title>
     <url>%2F2018%2F11%2F08%2Freactnative%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B-%E6%90%AD%E5%BB%BA%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%2F</url>
     <content type="text"><![CDATA[俗话说“工欲善其事，必先利其器”，这对咱们程序猿来说更是如此，强大的开发利器，不仅有助于我们提高开发效率，更能够让我们的开发过程变的舒心。这里我墙裂推荐大家配置一个Mac Book Pro,这简直是程序开发者的神奇。免费打个广告吧：https://item.jd.com/7842699.html, 现在适逢双11，更有优惠活动。正式进入主题。 配置开发环境这里直接推荐ReactNative中文网的配置说明：https://reactnative.cn/docs/getting-started.html 开发IDE响应平台开发软件： Xcode，Android StudioGit命令行优化：item命令控制面板配色这里推荐大家使用WebStorm 进行ReactNative的开发，非常强大的IDE，智能提醒，语法高亮等。使用Windows系统的小伙伴，配置开发环境可参考这篇文章：React Native开发一 webstorm搭建React Native开发环境 注意事项！！！注意！！！：init 命令默认会创建最新的版本，而目前最新的 0.45 及以上版本需要下载 boost 等几个第三方库编译。这些库在国内即便翻墙也很难下载成功，导致很多人无法运行iOS项目！！！中文网在论坛中提供了这些库的国内下载链接。如果你嫌麻烦，又没有对新版本的需求，那么可以暂时创建0.44.3的版本。1react-native init youprogectname 开在如下表中选择相应的版本号，进行创建项目，比如1react-native init reactnativeDemo --version 0.44.3 提示：你可以使用–version参数（注意是两个杠）创建指定版本的项目。例如react-native init MyApp –version 0.44.3。注意版本号必须精确到两个小数点。 如果在配置环境的过程中，遇到什么问题，可以在博客下方评论区给我留言，我会第一时间进行回复。]]></content>
       <categories>
@@ -56,7 +64,7 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[React-Native小白入门教程-前言]]></title>
+    <title><![CDATA[React-Native入门教程-前言]]></title>
     <url>%2F2018%2F11%2F08%2Freactnative%E5%B0%8F%E7%99%BD%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B1%2F</url>
     <content type="text"><![CDATA[从17年3月份开始接触ReactNative的开发到现在已经差不多一年半的时间了，在这一年多的时间里，完成从零到壹的过程，也使用ReactNative完成了6、7个APP的开发工作。期间踩了无数的坑，现在打算从零开始写一下怎么入门ReactNative开发。 教程目录索引：ReactNative小白入门教程-搭建开发环境 关于ReactNativeReact Native (简称RN)是Facebook于2015年4月开源的跨平台移动应用开发框架，是Facebook早先开源的JS框架 React 在原生移动应用平台的衍生产物，目前支持iOS和安卓两大平台。RN使用Javascript语言，类似于HTML的JSX，以及CSS来开发移动应用，因此熟悉Web前端开发的技术人员只需很少的学习就可以进入移动应用开发领域。 React Native使你能够在Javascript和React的基础上获得完全一致的开发体验，构建世界一流的原生APP。 React Native着力于提高多平台开发的开发效率 —— 仅需学习一次，编写任何平台。(Learn once, write anywhere) ReactNative的发展现状RN作为一款跨平台的开发框架，得到了国内很多公司的支持和使用，比如BATJ都有很多业务采用了RN的方案。RN的版本在稳步的不断迭代，不断修复bug, 丰富插件支持，有更加良好的生态环境，以及十分活跃的开发社区，在github2018年统计的开源项目中，Rn位列第二，仅次于微软的vscode，有理由项目Rn的未来发展将越来越好。有关链接： https://mp.weixin.qq.com/s/S0df_3mm_TOrCVQFcgRmSQ ReactNative重构路线图https://www.oschina.net/news/97129/state-of-react-native-2018https://www.oschina.net/news/101455/react-native-roadmap-2018 后续会推出ReactNative开发入门的系列文章，欢迎关注。]]></content>
       <categories>
