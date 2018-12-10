@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mongodb图形可视化客户端-robo 3T]]></title>
+    <url>%2F2018%2F12%2F10%2F3T%2F</url>
+    <content type="text"><![CDATA[1.官网下载地址：https://robomongo.org 选择Download Robo 3T2.下载完成之后，打开后点击左上角的 create创建一个连接，给该连接起个名字，如：localhost, 使用默认地址 localhost 和 端口27017 即可，点击save保存。如下图所示： 3.使用默认设置，点击save保存即可，会出现如下页面 4.点击Connect连接MongoDb数据库，就可以看到如下的页面了 5.右键数据库打开shell命令面板 6.打开后显示如下页面，输入如下命令，向数据库中添加一条数据 7.可以查看到刚才添加的数据 当然可以进行其他的增删改查操作。 使用图形化的工具操作Mongodb数据库是不是很爽呀。]]></content>
+      <tags>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[react-native-webview替代RN原生Core中Webview]]></title>
     <url>%2F2018%2F12%2F04%2Freact-native-webview%E6%9B%BF%E4%BB%A3RN%E5%8E%9F%E7%94%9FCore%E4%B8%ADWebview%2F</url>
     <content type="text"><![CDATA[Warning Please use the react-native-community/react-native-webview fork of this component instead. To reduce the surface area of React Native, &lt;WebView/&gt; is going to be removed from the React Native core. For more information, please read The Slimmening proposal. 一句话就是：使用 react-native-community/react-native-webview 替代。 要被从react-native core中删除了。 现在react-native-webview现在支持Android平台的onShouldStartLoadWithRequest方法了 ##使用方式：12$ yarn add react-native-webview$ react-native link react-native-webview ##使用案例：12345678910111213141516import React, &#123; Component &#125; from &quot;react&quot;;import &#123; StyleSheet, Text, View &#125; from &quot;react-native&quot;;import &#123; WebView &#125; from &quot;react-native-webview&quot;;// ...class MyWebComponent extends Component &#123; render() &#123; return ( &lt;WebView source=&#123;&#123; uri: &quot;https://infinite.red/react-native&quot; &#125;&#125; style=&#123;&#123; marginTop: 20 &#125;&#125; onLoadProgress=&#123;e =&gt; console.log(e.nativeEvent.progress)&#125; /&gt; ); &#125;&#125; 如果出现如下报错： Invariant Violation: requireNativeComponent: “RNCWKWebView” was not found in the UIManager 解决方案： ###1.将RNCWebView.xcodeproj添加到项目的Libraries中，用Xcode打开项目，在librarie右键点击add Files to 项目中 ###2.在Build Phases的Link Binary With Libraries中添加libRNCWebView.a文件]]></content>
