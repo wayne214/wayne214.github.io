@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[react-native底部导航快速切换时轮播图空白]]></title>
+    <url>%2F2018%2F12%2F11%2Freact-native%E8%BD%AE%E6%92%AD%E5%9B%BE%E7%A9%BA%E7%99%BD%2F</url>
+    <content type="text"><![CDATA[目前react-native平台最好用的轮播图组件：react-native-swiper 最近在项目迭代开发测试中发现一个问题，就是在快速切换APP底部tab导航栏时，集成的轮播图组件react-native-swiper会白屏，无法显示图片如下图所示： 通过查找react-native-swiper的issues发现了，也有人遇到这个问题，最终找到了解决方案：给组件Swiper添加一个属性即可：1removeClippedSubviews=&#123;false&#125; 添加位置如图所示：]]></content>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[mongodb图形可视化客户端-robo 3T]]></title>
     <url>%2F2018%2F12%2F10%2F3T%2F</url>
     <content type="text"><![CDATA[1.官网下载地址：https://robomongo.org 选择Download Robo 3T2.下载完成之后，打开后点击左上角的 create创建一个连接，给该连接起个名字，如：localhost, 使用默认地址 localhost 和 端口27017 即可，点击save保存。如下图所示： 3.使用默认设置，点击save保存即可，会出现如下页面 4.点击Connect连接MongoDb数据库，就可以看到如下的页面了 5.右键数据库打开shell命令面板 6.打开后显示如下页面，输入如下命令，向数据库中添加一条数据 7.可以查看到刚才添加的数据 当然可以进行其他的增删改查操作。 使用图形化的工具操作Mongodb数据库是不是很爽呀。]]></content>
