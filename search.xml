@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[ReactNative生命周期]]></title>
+    <url>%2F2018%2F12%2F14%2FReactNative%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
+    <content type="text"><![CDATA[1.组件实例化阶段defaultProps:设置组件的初始属性值，比如设置默认Color,width等，可以在通过this.props获取相应的值 constructor(props):这里通过this.props可以获取defaultProps设置的默认属性值，同时这里用于初始化控件的可变化的变量，通过this.state设置变量的初始值，通过this.setState()函数修改变量的值，调用render()函数重新渲染页面，得到新的页面 componentWillMount： 组件将要被加载到视图之前调用 render(): 第一次被调用，用于渲染页面componentDidMount：在调用了render方法，组件加载完成并被成功渲染出来之后，所要执行的后续操作，一般都会在这个函数中进行，比如经常要面对的网络请求等加载数据操作，因为UI渲染是异步的，所以在这个函数里面进行网络请求，能够避免出现UI错误。 2.组件运行时阶段组件的属性prop和状态state任何一个改变都可能会触发render()函数渲染页面 componentWillReceiveProps:指父元素对组件的props进行了修改 shouldComponentUpdate一般用于优化性能，通过业务逻辑判断返回true或false，来决定页面是否进行重新绘制，默认返回true,执行后面两个周期函数 componentWillUpdate:组件刷新前调用 componentDidUpdate：更新后 3.页面卸载页面：componentWillUnmount一般用于清理工作，比如移除事件监听，取消定时器等 4.生命周期函数调用次数 特别提示：更新state必须使用setState()函数，setState是一个异步的函数：setState(update,[callback])setState()不是立刻更新组件。其可能是批处理或推迟更新。这使得在调用setState()后立刻读取this.state的一个潜在陷阱。代替地，使用componentDidUpdate或一个setState回调（setState(updater, callback)），当中的每个方法都会保证在更新被应用之后触发。 参考文档：https://react.docschina.org/docs/react-component.html]]></content>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MacOS下安装MongoDB数据库]]></title>
     <url>%2F2018%2F12%2F11%2FMacOS%E4%B8%8B%E5%AE%89%E8%A3%85MongoDB%E6%95%B0%E6%8D%AE%E5%BA%93%2F</url>
     <content type="text"><![CDATA[官方链接：Install MongoDB Community Edition on macOS推荐大家使用Homebrew安装 ##1.更新 Homebrew’s 包版本1brew update ##2.安装MongoDB1brew install mongodb 休息片刻，等他安装完就好了默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下安装好了，还需要配置一下，否则是无法正常启动服务的 ##3.配置mongodb ####a.创建一个db目录，用于mongodb写数据1mkdir -p /data/db 如果出现 permission denied ，加上 sudo 命令：1sudo mkdir -p /data/db ####b.给 /data/db 文件夹赋予权限12345sudo chown id -u /data/db如果出现 &quot;illegal user name&quot; 的错误提示，这时我们可以查看当前的 username 并赋予权限：$ whoamiusername$ sudo chown username /data/db ####c.配置mongodb环境变量1.打开.zshrc 文件12345vim ~/.zshrc添加mongodb的安装目标到path中export PATH=/usr/local/Cellar/mongodb/4.0.4_1/bin:$&#123;PATH&#125;使配置生效source ~/.zshrc 2.修改 MongoDB 配置文件, 配置文件默认在 /usr/local/etc 下的 mongod.conf：123456789# Store data in /usr/local/var/mongodb instead of the default /data/dbdbpath = /data/db# Append logs to /usr/local/var/log/mongodb/mongo.loglogpath = /usr/local/var/log/mongodb/mongo.loglogappend = true# Only accept local connectionsbind_ip = 127.0.0.1 3.启动mongod服务1mongod 当出现上图红框中的命令时，就表明服务启动成功了，侦听端口为27017，这是mongod的默认端口，在另外的一个窗口中使用mongo就可以打开客户端：1mongo 这时候就可输入数据库命令进行操作了，比如show dbs,可以查看当前的数据库集合了 我的网站：https://wayne214.github.io]]></content>
