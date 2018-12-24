@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Taro小程序采坑记]]></title>
+    <url>%2F2018%2F12%2F24%2FTaro%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%87%87%E5%9D%91%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[Taro，京东凹凸实验室出品的适配多端的一个框架，Taro 是一套遵循 React 语法规范的 多端开发 解决方案。现如今市面上端的形态多种多样，Web、React-Native、微信小程序等各种端大行其道，当业务要求同时在不同的端都要求有所表现的时候，针对不同的端去编写多套代码的成本显然非常高，这时候只编写一套代码就能够适配到多端的能力就显得极为需要。 使用 Taro，我们可以只书写一套代码，再通过 Taro 的编译工具，将源代码分别编译出可以在不同端（微信小程序、H5、RN 等）运行的代码。 But 理想很丰满，现实很骨感最近在尝试采用其编写小程序代码，发现采坑的地方不少 ##事件处理bind函数，不能传值了？ Taro 目前暂时不支持通过匿名函数传值，也不支持多层 lambda 嵌套。当你有传参需求时，请全部使用 bind 来处理。更新了@tarojs/cli为最新版后，发现bind的方法不能传值了1&lt;Button onClick=&#123;this.goto.bind(this,&apos;111&apos;)&#125;&gt;跳转详情页&lt;/Button&gt; 打印出来的是这个鬼：根本不是传递的字符串根据issues中提供的方式： cli 和项目依赖都要升级到 1.2.1使用命令行更新cli及项目依赖后能够正常传值了1taro update project]]></content>
+      <tags>
+        <tag>小程序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[ReactNative生命周期]]></title>
     <url>%2F2018%2F12%2F14%2FReactNative%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
     <content type="text"><![CDATA[1.组件实例化阶段defaultProps:设置组件的初始属性值，比如设置默认Color,width等，可以在通过this.props获取相应的值 constructor(props):这里通过this.props可以获取defaultProps设置的默认属性值，同时这里用于初始化控件的可变化的变量，通过this.state设置变量的初始值，通过this.setState()函数修改变量的值，调用render()函数重新渲染页面，得到新的页面 componentWillMount： 组件将要被加载到视图之前调用 render(): 第一次被调用，用于渲染页面componentDidMount：在调用了render方法，组件加载完成并被成功渲染出来之后，所要执行的后续操作，一般都会在这个函数中进行，比如经常要面对的网络请求等加载数据操作，因为UI渲染是异步的，所以在这个函数里面进行网络请求，能够避免出现UI错误。 2.组件运行时阶段组件的属性prop和状态state任何一个改变都可能会触发render()函数渲染页面 componentWillReceiveProps:指父元素对组件的props进行了修改 shouldComponentUpdate一般用于优化性能，通过业务逻辑判断返回true或false，来决定页面是否进行重新绘制，默认返回true,执行后面两个周期函数 componentWillUpdate:组件刷新前调用 componentDidUpdate：更新后 3.页面卸载页面：componentWillUnmount一般用于清理工作，比如移除事件监听，取消定时器等 4.生命周期函数调用次数 特别提示：更新state必须使用setState()函数，setState是一个异步的函数：setState(update,[callback])setState()不是立刻更新组件。其可能是批处理或推迟更新。这使得在调用setState()后立刻读取this.state的一个潜在陷阱。代替地，使用componentDidUpdate或一个setState回调（setState(updater, callback)），当中的每个方法都会保证在更新被应用之后触发。 参考文档：https://react.docschina.org/docs/react-component.html]]></content>
