@@ -79,21 +79,20 @@
 
 
 
+<meta name="description" content="Reactnative的版本升级一直是一个工作量比较的大的事情，每次升级都可能伴随着很多的坑。前段时间在升级到0.56版本的时候发现一个问题，在flatlist使用中，加载多页后，列表项内容开始进行上下抖动的乱跳，疯了一样。于是开始上react-native的issues上寻找答案，有通过查看官方的版本升级日志找到了答案：react-native升级日志0.57在其中看到如下bugFix描述：">
 <meta name="keywords" content="ReactNative">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ReactNative生命周期">
-<meta property="og:url" content="http://yoursite.com/2018/12/14/ReactNative生命周期/index.html">
+<meta property="og:title" content="关于ReactNative0.56版本Flatlist列表内容跳动的问题">
+<meta property="og:url" content="http://yoursite.com/2019/01/04/react-native列表内容跳动/index.html">
 <meta property="og:site_name" content="Code change the World">
+<meta property="og:description" content="Reactnative的版本升级一直是一个工作量比较的大的事情，每次升级都可能伴随着很多的坑。前段时间在升级到0.56版本的时候发现一个问题，在flatlist使用中，加载多页后，列表项内容开始进行上下抖动的乱跳，疯了一样。于是开始上react-native的issues上寻找答案，有通过查看官方的版本升级日志找到了答案：react-native升级日志0.57在其中看到如下bugFix描述：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-077ae05e77f257dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-29975d061955c4f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-abde4cadf5964ae2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-dc62024c762a94d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-0cb98c92e14626c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2018-12-14T03:13:33.502Z">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-b5fb47511dc3c4c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2019-01-04T04:23:20.026Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ReactNative生命周期">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3112038-077ae05e77f257dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="关于ReactNative0.56版本Flatlist列表内容跳动的问题">
+<meta name="twitter:description" content="Reactnative的版本升级一直是一个工作量比较的大的事情，每次升级都可能伴随着很多的坑。前段时间在升级到0.56版本的时候发现一个问题，在flatlist使用中，加载多页后，列表项内容开始进行上下抖动的乱跳，疯了一样。于是开始上react-native的issues上寻找答案，有通过查看官方的版本升级日志找到了答案：react-native升级日志0.57在其中看到如下bugFix描述：">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3112038-b5fb47511dc3c4c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -123,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/12/14/ReactNative生命周期/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/04/react-native列表内容跳动/">
 
 
 
 
 
-  <title>ReactNative生命周期 | Code change the World</title>
+  <title>关于ReactNative0.56版本Flatlist列表内容跳动的问题 | Code change the World</title>
   
 
 
@@ -308,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/14/ReactNative生命周期/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/04/react-native列表内容跳动/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Wayne214">
@@ -325,7 +324,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">ReactNative生命周期</h2>
+          <h2 class="post-title" itemprop="name headline">关于ReactNative0.56版本Flatlist列表内容跳动的问题</h2>
         
 
         <div class="post-meta">
@@ -337,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-14T11:11:06+08:00">
-                2018-12-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-04T12:22:07+08:00">
+                2019-01-04
               </time>
             
 
@@ -356,8 +355,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/12/14/ReactNative生命周期/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/14/ReactNative生命周期/" itemprop="commentCount"></span>
+                <a href="/2019/01/04/react-native列表内容跳动/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/04/react-native列表内容跳动/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -365,7 +364,7 @@
 
           
           
-             <span id="/2018/12/14/ReactNative生命周期/" class="leancloud_visitors" data-flag-title="ReactNative生命周期">
+             <span id="/2019/01/04/react-native列表内容跳动/" class="leancloud_visitors" data-flag-title="关于ReactNative0.56版本Flatlist列表内容跳动的问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -396,20 +395,8 @@
       
 
       
-        <p><img src="https://upload-images.jianshu.io/upload_images/3112038-077ae05e77f257dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ReactNative生命周期"><br><a id="more"></a></p>
-<h2 id="1-组件实例化阶段"><a href="#1-组件实例化阶段" class="headerlink" title="1.组件实例化阶段"></a>1.组件实例化阶段</h2><h3 id="defaultProps"><a href="#defaultProps" class="headerlink" title="defaultProps:"></a>defaultProps:</h3><p>设置组件的初始属性值，比如设置默认Color,width等，可以在通过this.props获取相应的值</p>
-<h3 id="constructor-props"><a href="#constructor-props" class="headerlink" title="constructor(props):"></a>constructor(props):</h3><p>这里通过this.props可以获取defaultProps设置的默认属性值，同时这里用于初始化控件的可变化的变量，通过this.state设置变量的初始值，通过this.setState()函数修改变量的值，调用render()函数重新渲染页面，得到新的页面<br><img src="https://upload-images.jianshu.io/upload_images/3112038-29975d061955c4f8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h3 id="componentWillMount："><a href="#componentWillMount：" class="headerlink" title="componentWillMount："></a>componentWillMount：</h3><p> 组件将要被加载到视图之前调用</p>
-<h3 id="render-第一次被调用，用于渲染页面"><a href="#render-第一次被调用，用于渲染页面" class="headerlink" title="render(): 第一次被调用，用于渲染页面"></a>render(): 第一次被调用，用于渲染页面</h3><h3 id="componentDidMount："><a href="#componentDidMount：" class="headerlink" title="componentDidMount："></a>componentDidMount：</h3><p>在调用了render方法，组件加载完成并被成功渲染出来之后，所要执行的后续操作，一般都会在这个函数中进行，比如经常要面对的网络请求等加载数据操作，因为UI渲染是异步的，所以在这个函数里面进行网络请求，能够避免出现UI错误。</p>
-<h2 id="2-组件运行时阶段"><a href="#2-组件运行时阶段" class="headerlink" title="2.组件运行时阶段"></a>2.组件运行时阶段</h2><p>组件的属性prop和状态state任何一个改变都可能会触发render()函数渲染页面</p>
-<h3 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps:"></a>componentWillReceiveProps:</h3><p>指父元素对组件的props进行了修改</p>
-<h3 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate"></a>shouldComponentUpdate</h3><p>一般用于优化性能，通过业务逻辑判断返回true或false，来决定页面是否进行重新绘制，默认返回true,执行后面两个周期函数</p>
-<h3 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate:"></a>componentWillUpdate:</h3><p>组件刷新前调用</p>
-<h3 id="componentDidUpdate：更新后"><a href="#componentDidUpdate：更新后" class="headerlink" title="componentDidUpdate：更新后"></a>componentDidUpdate：更新后</h3><p><img src="https://upload-images.jianshu.io/upload_images/3112038-abde4cadf5964ae2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="3-页面卸载页面："><a href="#3-页面卸载页面：" class="headerlink" title="3.页面卸载页面："></a>3.页面卸载页面：</h2><h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount"></a>componentWillUnmount</h3><p>一般用于清理工作，比如移除事件监听，取消定时器等<br><img src="https://upload-images.jianshu.io/upload_images/3112038-dc62024c762a94d8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="4-生命周期函数调用次数"><a href="#4-生命周期函数调用次数" class="headerlink" title="4.生命周期函数调用次数"></a>4.生命周期函数调用次数</h2><p><img src="https://upload-images.jianshu.io/upload_images/3112038-0cb98c92e14626c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h1 id="特别提示："><a href="#特别提示：" class="headerlink" title="特别提示："></a>特别提示：</h1><p>更新state必须使用setState()函数，setState是一个异步的函数：setState(update,[callback])<br>setState()不是立刻更新组件。其可能是批处理或推迟更新。这使得在调用setState()后立刻读取this.state的一个潜在陷阱。代替地，使用componentDidUpdate或一个setState回调（setState(updater, callback)），当中的每个方法都会保证在更新被应用之后触发。</p>
-<p>参考文档：<a href="https://react.docschina.org/docs/react-component.html" target="_blank" rel="noopener">https://react.docschina.org/docs/react-component.html</a></p>
+        <p>Reactnative的版本升级一直是一个工作量比较的大的事情，每次升级都可能伴随着很多的坑。<br>前段时间在升级到0.56版本的时候发现一个问题，在flatlist使用中，加载多页后，列表项内容开始进行上下抖动的乱跳，疯了一样。<br>于是开始上react-native的issues上寻找答案，有通过查看官方的版本升级日志找到了答案：<a href="https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#057" target="_blank" rel="noopener">react-native升级日志0.57</a><br>在其中看到如下bugFix描述：<br><a id="more"></a><br><img src="https://upload-images.jianshu.io/upload_images/3112038-b5fb47511dc3c4c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>因为Flatlist继承自VirtualizedList,所以就豁朗开朗了。<br>解决方案：将ReactNative Version升级到0.57以上版本就好了<br><a href="https://reactnative.cn/docs/upgrading/" target="_blank" rel="noopener">官方升级方案</a>,推荐第一种“基于 Git 的自动合并更新”的升级方案。</p>
 
       
     </div>
@@ -479,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/12/11/MacOS下安装MongoDB数据库/" rel="next" title="MacOS下安装MongoDB数据库">
-                <i class="fa fa-chevron-left"></i> MacOS下安装MongoDB数据库
+              <a href="/2018/12/24/Taro小程序采坑记/" rel="next" title="Taro小程序采坑记">
+                <i class="fa fa-chevron-left"></i> Taro小程序采坑记
               </a>
             
           </div>
@@ -488,10 +475,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/12/24/Taro小程序采坑记/" rel="prev" title="Taro小程序采坑记">
-                Taro小程序采坑记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -574,17 +557,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -714,22 +688,6 @@ var jiathis_config={
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-组件实例化阶段"><span class="nav-number">1.</span> <span class="nav-text">1.组件实例化阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#defaultProps"><span class="nav-number">1.1.</span> <span class="nav-text">defaultProps:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-props"><span class="nav-number">1.2.</span> <span class="nav-text">constructor(props):</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillMount："><span class="nav-number">1.3.</span> <span class="nav-text">componentWillMount：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#render-第一次被调用，用于渲染页面"><span class="nav-number">1.4.</span> <span class="nav-text">render(): 第一次被调用，用于渲染页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidMount："><span class="nav-number">1.5.</span> <span class="nav-text">componentDidMount：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-组件运行时阶段"><span class="nav-number">2.</span> <span class="nav-text">2.组件运行时阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillReceiveProps"><span class="nav-number">2.1.</span> <span class="nav-text">componentWillReceiveProps:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shouldComponentUpdate"><span class="nav-number">2.2.</span> <span class="nav-text">shouldComponentUpdate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillUpdate"><span class="nav-number">2.3.</span> <span class="nav-text">componentWillUpdate:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidUpdate：更新后"><span class="nav-number">2.4.</span> <span class="nav-text">componentDidUpdate：更新后</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-页面卸载页面："><span class="nav-number">3.</span> <span class="nav-text">3.页面卸载页面：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillUnmount"><span class="nav-number">3.1.</span> <span class="nav-text">componentWillUnmount</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-生命周期函数调用次数"><span class="nav-number">4.</span> <span class="nav-text">4.生命周期函数调用次数</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#特别提示："><span class="nav-number"></span> <span class="nav-text">特别提示：</span></a></li></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

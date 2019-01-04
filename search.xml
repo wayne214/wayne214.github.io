@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[关于ReactNative0.56版本Flatlist列表内容跳动的问题]]></title>
+    <url>%2F2019%2F01%2F04%2Freact-native%E5%88%97%E8%A1%A8%E5%86%85%E5%AE%B9%E8%B7%B3%E5%8A%A8%2F</url>
+    <content type="text"><![CDATA[Reactnative的版本升级一直是一个工作量比较的大的事情，每次升级都可能伴随着很多的坑。前段时间在升级到0.56版本的时候发现一个问题，在flatlist使用中，加载多页后，列表项内容开始进行上下抖动的乱跳，疯了一样。于是开始上react-native的issues上寻找答案，有通过查看官方的版本升级日志找到了答案：react-native升级日志0.57在其中看到如下bugFix描述： 因为Flatlist继承自VirtualizedList,所以就豁朗开朗了。解决方案：将ReactNative Version升级到0.57以上版本就好了官方升级方案,推荐第一种“基于 Git 的自动合并更新”的升级方案。]]></content>
+      <tags>
+        <tag>ReactNative</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Taro小程序采坑记]]></title>
     <url>%2F2018%2F12%2F24%2FTaro%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%87%87%E5%9D%91%E8%AE%B0%2F</url>
     <content type="text"><![CDATA[Taro，京东凹凸实验室出品的适配多端的一个框架，Taro 是一套遵循 React 语法规范的 多端开发 解决方案。现如今市面上端的形态多种多样，Web、React-Native、微信小程序等各种端大行其道，当业务要求同时在不同的端都要求有所表现的时候，针对不同的端去编写多套代码的成本显然非常高，这时候只编写一套代码就能够适配到多端的能力就显得极为需要。 使用 Taro，我们可以只书写一套代码，再通过 Taro 的编译工具，将源代码分别编译出可以在不同端（微信小程序、H5、RN 等）运行的代码。 But 理想很丰满，现实很骨感最近在尝试采用其编写小程序代码，发现采坑的地方不少 ##事件处理bind函数，不能传值了？ Taro 目前暂时不支持通过匿名函数传值，也不支持多层 lambda 嵌套。当你有传参需求时，请全部使用 bind 来处理。更新了@tarojs/cli为最新版后，发现bind的方法不能传值了1&lt;Button onClick=&#123;this.goto.bind(this,&apos;111&apos;)&#125;&gt;跳转详情页&lt;/Button&gt; 打印出来的是这个鬼：根本不是传递的字符串根据issues中提供的方式： cli 和项目依赖都要升级到 1.2.1使用命令行更新cli及项目依赖后能够正常传值了1taro update project]]></content>
