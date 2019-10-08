@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -399,7 +399,9 @@
         <p>目前react-native平台最好用的轮播图组件：<a href="https://github.com/leecade/react-native-swiper/" target="_blank" rel="noopener">react-native-swiper</a></p>
 <p>最近在项目迭代开发测试中发现一个问题，就是在快速切换APP底部tab导航栏时，集成的轮播图组件<a href="https://github.com/leecade/react-native-swiper/" target="_blank" rel="noopener">react-native-swiper</a>会白屏，无法显示图片<br>如下图所示：<br><img src="https://upload-images.jianshu.io/upload_images/3112038-1618bbd8864b9936.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <a id="more"></a>
-<p>通过查找react-native-swiper的issues发现了，也有人遇到这个问题，最终找到了解决方案：<br>给组件Swiper添加一个属性即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">removeClippedSubviews=&#123;false&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过查找react-native-swiper的issues发现了，也有人遇到这个问题，最终找到了解决方案：<br>给组件Swiper添加一个属性即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">removeClippedSubviews=&#123;false&#125;</span><br></pre></td></tr></table></figure>
+
 <p>添加位置如图所示：<br><img src="https://upload-images.jianshu.io/upload_images/3112038-04eddb0d1681df51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 
       

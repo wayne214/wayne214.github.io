@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="官方链接：Install MongoDB Community Edition on macOS推荐大家使用Homebrew安装 ##1.更新 Homebrew’s 包版本1brew update ##2.安装MongoDB1brew install mongodb 休息片刻，等他安装完就好了默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下安装好了，还需">
+<meta name="description" content="官方链接：Install MongoDB Community Edition on macOS推荐大家使用Homebrew安装##1.更新 Homebrew’s 包版本 1brew update  ##2.安装MongoDB 1brew install mongodb  休息片刻，等他安装完就好了默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下安装好了">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MacOS下安装MongoDB数据库">
 <meta property="og:url" content="http://yoursite.com/2018/12/11/MacOS下安装MongoDB数据库/index.html">
 <meta property="og:site_name" content="Code change the World">
-<meta property="og:description" content="官方链接：Install MongoDB Community Edition on macOS推荐大家使用Homebrew安装 ##1.更新 Homebrew’s 包版本1brew update ##2.安装MongoDB1brew install mongodb 休息片刻，等他安装完就好了默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下安装好了，还需">
+<meta property="og:description" content="官方链接：Install MongoDB Community Edition on macOS推荐大家使用Homebrew安装##1.更新 Homebrew’s 包版本 1brew update  ##2.安装MongoDB 1brew install mongodb  休息片刻，等他安装完就好了默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下安装好了">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-bc82d65c982c369d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3112038-5227876fc02d2d98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
@@ -93,7 +93,7 @@
 <meta property="og:updated_time" content="2018-12-11T07:41:33.314Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MacOS下安装MongoDB数据库">
-<meta name="twitter:description" content="官方链接：Install MongoDB Community Edition on macOS推荐大家使用Homebrew安装 ##1.更新 Homebrew’s 包版本1brew update ##2.安装MongoDB1brew install mongodb 休息片刻，等他安装完就好了默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下安装好了，还需">
+<meta name="twitter:description" content="官方链接：Install MongoDB Community Edition on macOS推荐大家使用Homebrew安装##1.更新 Homebrew’s 包版本 1brew update  ##2.安装MongoDB 1brew install mongodb  休息片刻，等他安装完就好了默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下安装好了">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/3112038-bc82d65c982c369d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -397,19 +397,35 @@
       
 
       
-        <p>官方链接：<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/" target="_blank" rel="noopener">Install MongoDB Community Edition on macOS</a><br>推荐大家使用<a href="https://brew.sh/index_zh-tw.html" target="_blank" rel="noopener">Homebrew</a>安装</p>
-<p>##1.更新 Homebrew’s 包版本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br></pre></td></tr></table></figure></p>
-<p>##2.安装MongoDB<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure></p>
+        <p>官方链接：<a href="https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/" target="_blank" rel="noopener">Install MongoDB Community Edition on macOS</a><br>推荐大家使用<a href="https://brew.sh/index_zh-tw.html" target="_blank" rel="noopener">Homebrew</a>安装<br>##1.更新 Homebrew’s 包版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew update</span><br></pre></td></tr></table></figure>
+
+<p>##2.安装MongoDB</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure>
+
 <p>休息片刻，等他安装完就好了<br>默认安装在/usr/local/Cellar/mongodb/4.0.4_1（我的版本）目录下<br>安装好了，还需要配置一下，否则是无法正常启动服务的</p>
 <a id="more"></a>
-<p>##3.配置mongodb</p>
-<p>####a.创建一个db目录，用于mongodb写数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/db</span><br></pre></td></tr></table></figure></p>
-<p>如果出现 permission denied ，加上 sudo 命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /data/db</span><br></pre></td></tr></table></figure></p>
-<p>####b.给 /data/db 文件夹赋予权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo chown id -u /data/db</span><br><span class="line">如果出现 &quot;illegal user name&quot; 的错误提示，这时我们可以查看当前的 username 并赋予权限：</span><br><span class="line">$ whoami</span><br><span class="line">username</span><br><span class="line">$ sudo chown username /data/db</span><br></pre></td></tr></table></figure></p>
-<p>####c.配置mongodb环境变量<br>1.打开.zshrc 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line">添加mongodb的安装目标到path中</span><br><span class="line">export PATH=/usr/local/Cellar/mongodb/4.0.4_1/bin:$&#123;PATH&#125;</span><br><span class="line">使配置生效</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure></p>
-<p>2.修改 MongoDB 配置文件, 配置文件默认在 /usr/local/etc 下的 mongod.conf：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Store data in /usr/local/var/mongodb instead of the default /data/db</span><br><span class="line">dbpath = /data/db</span><br><span class="line"># Append logs to /usr/local/var/log/mongodb/mongo.log</span><br><span class="line">logpath = /usr/local/var/log/mongodb/mongo.log</span><br><span class="line">logappend = true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Only accept local connections</span><br><span class="line">bind_ip = 127.0.0.1</span><br></pre></td></tr></table></figure></p>
-<p>3.启动mongod服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://upload-images.jianshu.io/upload_images/3112038-bc82d65c982c369d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>当出现上图红框中的命令时，就表明服务启动成功了，侦听端口为27017，这是mongod的默认端口，在另外的一个窗口中使用mongo就可以打开客户端：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure></p>
+<p>##3.配置mongodb<br>####a.创建一个db目录，用于mongodb写数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/db</span><br></pre></td></tr></table></figure>
+
+<p>如果出现 permission denied ，加上 sudo 命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /data/db</span><br></pre></td></tr></table></figure>
+
+<p>####b.给 /data/db 文件夹赋予权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo chown id -u /data/db</span><br><span class="line">如果出现 &quot;illegal user name&quot; 的错误提示，这时我们可以查看当前的 username 并赋予权限：</span><br><span class="line">$ whoami</span><br><span class="line">username</span><br><span class="line">$ sudo chown username /data/db</span><br></pre></td></tr></table></figure>
+
+<p>####c.配置mongodb环境变量<br>1.打开.zshrc 文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.zshrc</span><br><span class="line">添加mongodb的安装目标到path中</span><br><span class="line">export PATH=/usr/local/Cellar/mongodb/4.0.4_1/bin:$&#123;PATH&#125;</span><br><span class="line">使配置生效</span><br><span class="line">source ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>2.修改 MongoDB 配置文件, 配置文件默认在 /usr/local/etc 下的 mongod.conf：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Store data in /usr/local/var/mongodb instead of the default /data/db</span><br><span class="line">dbpath = /data/db</span><br><span class="line"># Append logs to /usr/local/var/log/mongodb/mongo.log</span><br><span class="line">logpath = /usr/local/var/log/mongodb/mongo.log</span><br><span class="line">logappend = true</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Only accept local connections</span><br><span class="line">bind_ip = 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<p>3.启动mongod服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://upload-images.jianshu.io/upload_images/3112038-bc82d65c982c369d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>当出现上图红框中的命令时，就表明服务启动成功了，侦听端口为27017，这是mongod的默认端口，在另外的一个窗口中使用mongo就可以打开客户端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://upload-images.jianshu.io/upload_images/3112038-5227876fc02d2d98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>这时候就可输入数据库命令进行操作了，比如show dbs,可以查看当前的数据库集合了<br><img src="https://upload-images.jianshu.io/upload_images/3112038-8783d295aa4c6f79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <p>我的网站：<a href="https://wayne214.github.io" target="_blank" rel="noopener">https://wayne214.github.io</a></p>

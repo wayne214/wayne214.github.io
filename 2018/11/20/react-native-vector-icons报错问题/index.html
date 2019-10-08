@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons`">
+<meta name="description" content="最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。 1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons">
 <meta name="keywords" content="ReactNative">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react-native-vector-icons报错问题">
 <meta property="og:url" content="http://yoursite.com/2018/11/20/react-native-vector-icons报错问题/index.html">
 <meta property="og:site_name" content="Code change the World">
-<meta property="og:description" content="最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons`">
+<meta property="og:description" content="最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。 1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-11-20T04:00:30.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native-vector-icons报错问题">
-<meta name="twitter:description" content="最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons`">
+<meta name="twitter:description" content="最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。 1234error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons">
 
 
 
@@ -393,9 +393,11 @@
       
 
       
-        <p>最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons` was found. However the module `dist/EvilIcons` could not be found within the package. Indeed, none of these files exist:</span><br><span class="line"></span><br><span class="line">  * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)`</span><br><span class="line">  * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons/index(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)`</span><br></pre></td></tr></table></figure></p>
-<p>解决问题第一大法，去github上找到这个项目的issues中，在<br><a href="https://github.com/oblador/react-native-vector-icons/issues/626中看到了解决方案：" target="_blank" rel="noopener">https://github.com/oblador/react-native-vector-icons/issues/626中看到了解决方案：</a><br>在项目的根目录下，执行一下如下代码就OK了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json</span><br></pre></td></tr></table></figure></p>
+        <p>最近在写项目的时候，在调试代码的过程中，偶尔会报如下错误，想必好多同学都遇到了，现在记录一下，和大家分享。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">error: bundling failed: Error: While resolving module `react-native-vector-icons/dist/EvilIcons`, the Haste package `react-native-vector-icons` was found. However the module `dist/EvilIcons` could not be found within the package. Indeed, none of these files exist:</span><br><span class="line"></span><br><span class="line">  * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)`</span><br><span class="line">  * `/Users/user/Desktop/testapp/node_modules/react-native/local-cli/core/__fixtures__/files/dist/EvilIcons/index(.native||.android.js|.native.js|.js|.android.json|.native.json|.json)`</span><br></pre></td></tr></table></figure>
 
+<p>解决问题第一大法，去github上找到这个项目的issues中，在<br><a href="https://github.com/oblador/react-native-vector-icons/issues/626中看到了解决方案：" target="_blank" rel="noopener">https://github.com/oblador/react-native-vector-icons/issues/626中看到了解决方案：</a><br>在项目的根目录下，执行一下如下代码就OK了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm ./node_modules/react-native/local-cli/core/__fixtures__/files/package.json</span><br></pre></td></tr></table></figure>
       
     </div>
     

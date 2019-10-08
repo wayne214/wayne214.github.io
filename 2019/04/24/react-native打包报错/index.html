@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -406,11 +406,13 @@
 <li>在没有添加react-native-spinkit这个第三方库是打包也正常</li>
 <li>添加react-native-spinkit第三库，进行run-android debug运行也正常</li>
 <li>但是使用cd android &amp;&amp; ./gradlew assembleRelease命令打正式包就build失败了<h3 id="报错信息如下："><a href="#报错信息如下：" class="headerlink" title="报错信息如下："></a>报错信息如下：</h3><img src="https://upload-images.jianshu.io/upload_images/3112038-be00fae0b55e595c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>于是开始Google这个错误，<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Daemon:  AAPT2 aapt2-3.2.1-4818971-osx Daemon #0</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <p>但是各种答案都不能解决这个问题，而且还牵涉出其他的新问题。<br>思来想去，应该是添加的第三库react-native-spinkit出现了问题，终于在issues中找到了答案。<br>原来是第三库中的buildTools,compileSdk 和targetSdk的版本和项目中的对应的版本号不一致导致的。</p>
 <h3 id="解决方案如下"><a href="#解决方案如下" class="headerlink" title="解决方案如下"></a>解决方案如下</h3><p>在项目中android\build.gradle文件中的’allProjects’的下方添加如下代码<br><img src="https://upload-images.jianshu.io/upload_images/3112038-ac91766388109767.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">				// Add jitpack repository (added by react-native-spinkit)</span><br><span class="line">				maven &#123; url &quot;https://jitpack.io&quot; &#125;</span><br><span class="line">        mavenLocal()</span><br><span class="line">        google()</span><br><span class="line">        jcenter()</span><br><span class="line">        maven &#123;</span><br><span class="line">            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm</span><br><span class="line">            url &quot;$rootDir/../node_modules/react-native/android&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">在allprojects下方添加如下代码</span><br><span class="line"> subprojects &#123;</span><br><span class="line">        afterEvaluate &#123;</span><br><span class="line">            project -&gt;</span><br><span class="line">                if (project.hasProperty(&quot;android&quot;)) &#123;</span><br><span class="line">                    android &#123;</span><br><span class="line">                        compileSdkVersion = rootProject.compileSdkVersion</span><br><span class="line">                        buildToolsVersion = rootProject.buildToolsVersion</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><p>添加完成后，重新使用cd android &amp;&amp; ./gradlew assembleRelease 命令进行打包就顺利成功的打包了，成功截图如下<br><img src="https://upload-images.jianshu.io/upload_images/3112038-7db5a60dd400d7ba.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 
       

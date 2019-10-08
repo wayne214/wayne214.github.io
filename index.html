@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -893,8 +893,11 @@
         
           <p>根据咱们程序员学习的惯例，学习一门新技术都是从HelloWorld开始的。<br>感觉编程是一件非常富有意义的事情，程序员也是一群可爱的人，渴望被关怀和关注，因为我们总在和世界say Hi.<br>好了进入正题</p>
 <h2 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h2><p>首先创建一个项目，可看我上一篇文章写得<br><a href="https://www.jianshu.com/p/1b944060ee68" target="_blank" rel="noopener">IntelliJ IDEA创建第一个Spring boot项目</a><br>接下来运行这个项目，你将会看到如下页面<br><img src="https://upload-images.jianshu.io/upload_images/3112038-a7ff20ce88c3a9c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>提示我们当前没有准确的映射，所以找不到对应的页面也就是404。莫慌，接下来咱们处理一下</p>
-<h2 id="创建HelloController控制器"><a href="#创建HelloController控制器" class="headerlink" title="创建HelloController控制器"></a>创建HelloController控制器</h2><p>在项目名/src/main/java/包名下，新建一个config包，包下面创建HelloController<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @RequestMapping(value = &quot;/hello&quot;,method = RequestMethod.GET)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public String hello()&#123;</span><br><span class="line">        return &quot;Hello World&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">注解说明：</span><br><span class="line">@Controller: 可让项目扫描自动检测到这个类,处理http请求</span><br><span class="line">@ RequestMapping 请求的路由映射，访问的路径就是：http://localhost:8080/hello</span><br><span class="line">value: 路由名</span><br><span class="line">method: 请求方式，GET,POST,PUT,DELETE等</span><br></pre></td></tr></table></figure></p>
+<h2 id="创建HelloController控制器"><a href="#创建HelloController控制器" class="headerlink" title="创建HelloController控制器"></a>创建HelloController控制器</h2><p>在项目名/src/main/java/包名下，新建一个config包，包下面创建HelloController</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class HelloController &#123;</span><br><span class="line">    @RequestMapping(value = &quot;/hello&quot;,method = RequestMethod.GET)</span><br><span class="line">    @ResponseBody</span><br><span class="line">    public String hello()&#123;</span><br><span class="line">        return &quot;Hello World&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">注解说明：</span><br><span class="line">@Controller: 可让项目扫描自动检测到这个类,处理http请求</span><br><span class="line">@ RequestMapping 请求的路由映射，访问的路径就是：http://localhost:8080/hello</span><br><span class="line">value: 路由名</span><br><span class="line">method: 请求方式，GET,POST,PUT,DELETE等</span><br></pre></td></tr></table></figure>
+
 <h2 id="重新启动项目"><a href="#重新启动项目" class="headerlink" title="重新启动项目"></a>重新启动项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">访问：http://localhost:8080/hello, 就看到Hello World了</span><br></pre></td></tr></table></figure>
+
 <p><img src="https://upload-images.jianshu.io/upload_images/3112038-0d47fa953327cee8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>看到如上图所示，就表示我们的hello world成功了。</p>
 <h2 id="目录结构："><a href="#目录结构：" class="headerlink" title="目录结构："></a>目录结构：</h2><p><img src="https://upload-images.jianshu.io/upload_images/3112038-f286882f2b5ad6c5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 <ul>
@@ -1073,8 +1076,7 @@
 
       
         
-          <p>原文地址：<a href="https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#0580" target="_blank" rel="noopener">https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#0580</a><br>本文由简书作者<a href="https://www.jianshu.com/u/8ba7c349861d" target="_blank" rel="noopener">凌宇之蓝</a>翻译,因本人水平有限，难免翻译有误，还望各位见谅。</p>
-<p>##[0.58.0]<br>欢迎阅读2019年1月发布的React Native。此版本有许多重大变化，我们特别提请您注意：</p>
+          <p>原文地址：<a href="https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#0580" target="_blank" rel="noopener">https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#0580</a><br>本文由简书作者<a href="https://www.jianshu.com/u/8ba7c349861d" target="_blank" rel="noopener">凌宇之蓝</a>翻译,因本人水平有限，难免翻译有误，还望各位见谅。<br>##[0.58.0]<br>欢迎阅读2019年1月发布的React Native。此版本有许多重大变化，我们特别提请您注意：</p>
 <ul>
 <li>核心组件的流程类型的现代化和加强</li>
 <li>中断对ScrollView，CameraRollView和SwipeableRow的更改，使其在某些方法中不再绑定到组件实例</li>
@@ -1082,7 +1084,7 @@
 <li>从/ assets之外的目录提供的资产</li>
 <li>针对意外行为的大量崩溃修复和解决方案</li>
 </ul>
-<p>感谢那些对我们的发布候选人提供反馈的人。如果您有兴趣帮助评估我们的下一个版本，请在此处查看我们的跟踪问题。<br>
+<p>感谢那些对我们的发布候选人提供反馈的人。如果您有兴趣帮助评估我们的下一个版本，请在此处查看我们的跟踪问题。</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/25/ReactNative0.58正式版发布/#more" rel="contents">
@@ -1092,7 +1094,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
     
     
     
@@ -1385,7 +1387,8 @@
 <blockquote>
 <p>排序检索数据,关键字order</p>
 </blockquote>
-<p>##1.按照某个列名排序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">普通排序</span><br><span class="line">mysql&gt; select * from user;</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">| id | name   | age | address               | sex |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">|  1 | 张三   |  20 | 北京海底市南区        |   1 |</span><br><span class="line">|  2 | 李四   |  22 | 北京海底市南区        |   1 |</span><br><span class="line">|  3 | 赵芸   |  32 | 上海市徐汇区          |   2 |</span><br><span class="line">|  4 | 王丽   |  31 | 广州厦门              |   2 |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line">按照列名name排序是什么样呢？</span><br><span class="line">mysql&gt; select * from user order by name;</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">| id | name   | age | address               | sex |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">|  1 | 张三   |  20 | 北京海底市南区        |   1 |</span><br><span class="line">|  2 | 李四   |  22 | 北京海底市南区        |   1 |</span><br><span class="line">|  4 | 王丽   |  31 | 广州厦门              |   2 |</span><br><span class="line">|  3 | 赵芸   |  32 | 上海市徐汇区          |   2 |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">4 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+<p>##1.按照某个列名排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">普通排序</span><br><span class="line">mysql&gt; select * from user;</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">| id | name   | age | address               | sex |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">|  1 | 张三   |  20 | 北京海底市南区        |   1 |</span><br><span class="line">|  2 | 李四   |  22 | 北京海底市南区        |   1 |</span><br><span class="line">|  3 | 赵芸   |  32 | 上海市徐汇区          |   2 |</span><br><span class="line">|  4 | 王丽   |  31 | 广州厦门              |   2 |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line">按照列名name排序是什么样呢？</span><br><span class="line">mysql&gt; select * from user order by name;</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">| id | name   | age | address               | sex |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">|  1 | 张三   |  20 | 北京海底市南区        |   1 |</span><br><span class="line">|  2 | 李四   |  22 | 北京海底市南区        |   1 |</span><br><span class="line">|  4 | 王丽   |  31 | 广州厦门              |   2 |</span><br><span class="line">|  3 | 赵芸   |  32 | 上海市徐汇区          |   2 |</span><br><span class="line">+----+--------+-----+-----------------------+-----+</span><br><span class="line">4 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/21/MySQL学习笔记之三排序和过滤/#more" rel="contents">
@@ -1847,7 +1850,7 @@
 
       
         
-          <p>Reactnative的版本升级一直是一个工作量比较的大的事情，每次升级都可能伴随着很多的坑。<br>前段时间在升级到0.56版本的时候发现一个问题，在flatlist使用中，加载多页后，列表项内容开始进行上下抖动的乱跳，疯了一样。<br>于是开始上react-native的issues上寻找答案，有通过查看官方的版本升级日志找到了答案：<a href="https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#057" target="_blank" rel="noopener">react-native升级日志0.57</a><br>在其中看到如下bugFix描述：<br>
+          <p>Reactnative的版本升级一直是一个工作量比较的大的事情，每次升级都可能伴随着很多的坑。<br>前段时间在升级到0.56版本的时候发现一个问题，在flatlist使用中，加载多页后，列表项内容开始进行上下抖动的乱跳，疯了一样。<br>于是开始上react-native的issues上寻找答案，有通过查看官方的版本升级日志找到了答案：<a href="https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#057" target="_blank" rel="noopener">react-native升级日志0.57</a><br>在其中看到如下bugFix描述：</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/04/react-native列表内容跳动/#more" rel="contents">
@@ -1857,7 +1860,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
     
     
     

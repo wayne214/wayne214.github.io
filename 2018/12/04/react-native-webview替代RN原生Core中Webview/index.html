@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -402,15 +402,18 @@
 <p>一句话就是：使用 react-native-community/react-native-webview 替代。<webview> 要被从react-native core中删除了。</webview></p>
 <p>现在<a href="https://github.com/react-native-community/react-native-webview" target="_blank" rel="noopener">react-native-webview</a>现在支持Android平台的onShouldStartLoadWithRequest方法了</p>
 <a id="more"></a>
-<p>##使用方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add react-native-webview</span><br><span class="line">$ react-native link react-native-webview</span><br></pre></td></tr></table></figure></p>
-<p>##使用案例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &quot;react&quot;;</span><br><span class="line">import &#123; StyleSheet, Text, View &#125; from &quot;react-native&quot;;</span><br><span class="line">import &#123; WebView &#125; from &quot;react-native-webview&quot;;</span><br><span class="line"></span><br><span class="line">// ...</span><br><span class="line">class MyWebComponent extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;WebView</span><br><span class="line">        source=&#123;&#123; uri: &quot;https://infinite.red/react-native&quot; &#125;&#125;</span><br><span class="line">        style=&#123;&#123; marginTop: 20 &#125;&#125;</span><br><span class="line">        onLoadProgress=&#123;e =&gt; console.log(e.nativeEvent.progress)&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+<p>##使用方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add react-native-webview</span><br><span class="line">$ react-native link react-native-webview</span><br></pre></td></tr></table></figure>
+
+<p>##使用案例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &quot;react&quot;;</span><br><span class="line">import &#123; StyleSheet, Text, View &#125; from &quot;react-native&quot;;</span><br><span class="line">import &#123; WebView &#125; from &quot;react-native-webview&quot;;</span><br><span class="line"></span><br><span class="line">// ...</span><br><span class="line">class MyWebComponent extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;WebView</span><br><span class="line">        source=&#123;&#123; uri: &quot;https://infinite.red/react-native&quot; &#125;&#125;</span><br><span class="line">        style=&#123;&#123; marginTop: 20 &#125;&#125;</span><br><span class="line">        onLoadProgress=&#123;e =&gt; console.log(e.nativeEvent.progress)&#125;</span><br><span class="line">      /&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>如果出现如下报错：</p>
 <blockquote>
 <p>Invariant Violation: requireNativeComponent: “RNCWKWebView” was not found in the UIManager</p>
 </blockquote>
-<p>解决方案：</p>
-<p>###1.将RNCWebView.xcodeproj添加到项目的Libraries中，<br>用Xcode打开项目，在librarie右键点击add Files to 项目中<br><img src="https://upload-images.jianshu.io/upload_images/3112038-188402bc275c6971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>###2.在Build Phases的Link Binary With Libraries中添加libRNCWebView.a文件<br><img src="https://upload-images.jianshu.io/upload_images/3112038-552ba1284076d247.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>解决方案：<br>###1.将RNCWebView.xcodeproj添加到项目的Libraries中，<br>用Xcode打开项目，在librarie右键点击add Files to 项目中<br><img src="https://upload-images.jianshu.io/upload_images/3112038-188402bc275c6971.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>###2.在Build Phases的Link Binary With Libraries中添加libRNCWebView.a文件<br><img src="https://upload-images.jianshu.io/upload_images/3112038-552ba1284076d247.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
 
       
     </div>

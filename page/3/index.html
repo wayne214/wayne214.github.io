@@ -6,7 +6,7 @@
 
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -722,7 +722,8 @@
       
         
           <p>当前项目react-native的版本是0.53.3，因为最近在做一系列性能优化的工作，于是计划升级一下RN的版本，升级至0.56.0。<br>先看一下ReactNative0.56.0版本更新的内容：<br><a href="https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#056" target="_blank" rel="noopener">https://github.com/react-native-community/react-native-releases/blob/master/CHANGELOG.md#056</a><br>步骤及遇到的问题如下：</p>
-<h2 id="1-使用https-reactnative-cn-docs-upgrading-中基于Git的自动合并更新方式："><a href="#1-使用https-reactnative-cn-docs-upgrading-中基于Git的自动合并更新方式：" class="headerlink" title="1.使用https://reactnative.cn/docs/upgrading/中基于Git的自动合并更新方式："></a>1.使用<a href="https://reactnative.cn/docs/upgrading/中基于Git的自动合并更新方式：" target="_blank" rel="noopener">https://reactnative.cn/docs/upgrading/中基于Git的自动合并更新方式：</a></h2><p>首先全局安装react-native-git-upgrade工具模块：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g react-native-git-upgrade</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-使用https-reactnative-cn-docs-upgrading-中基于Git的自动合并更新方式："><a href="#1-使用https-reactnative-cn-docs-upgrading-中基于Git的自动合并更新方式：" class="headerlink" title="1.使用https://reactnative.cn/docs/upgrading/中基于Git的自动合并更新方式："></a>1.使用<a href="https://reactnative.cn/docs/upgrading/中基于Git的自动合并更新方式：" target="_blank" rel="noopener">https://reactnative.cn/docs/upgrading/中基于Git的自动合并更新方式：</a></h2><p>首先全局安装react-native-git-upgrade工具模块：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g react-native-git-upgrade</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/13/react-native升级0-56/#more" rel="contents">
@@ -1392,7 +1393,7 @@
 
       
         
-          <p>Python 非常易学，强大的编程语言。Python 包括高效高级的数据结构，提供简单且高效的面向对象编程。<br>Python 的学习过程少不了 IDE 或者代码编辑器，或者集成的开发编辑器（IDE）。这些 Python 开发工具帮助开发者加快使用 Python 开发的速度，提高效率。高效的代码编辑器或者 IDE 应该会提供插件，工具等能帮助开发者高效开发的特性。<br>这篇文章收集了一些对开发者非常有帮助的，最好的 10 款 Python IDEs。如果你有其他更好的推荐，请在评论和大家分享一下：）<br>
+          <p>Python 非常易学，强大的编程语言。Python 包括高效高级的数据结构，提供简单且高效的面向对象编程。<br>Python 的学习过程少不了 IDE 或者代码编辑器，或者集成的开发编辑器（IDE）。这些 Python 开发工具帮助开发者加快使用 Python 开发的速度，提高效率。高效的代码编辑器或者 IDE 应该会提供插件，工具等能帮助开发者高效开发的特性。<br>这篇文章收集了一些对开发者非常有帮助的，最好的 10 款 Python IDEs。如果你有其他更好的推荐，请在评论和大家分享一下：）</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/05/10款好用的PythonIDE/#more" rel="contents">
@@ -1402,7 +1403,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
     
     
     
@@ -1734,9 +1735,11 @@
 
       
         
-          <p>ReactNative中的Image使用时比较简单的，比如下面这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image</span><br><span class="line">            resizeMode=&apos;contain&apos;</span><br><span class="line">            defaultSource=&#123;require(&apos;images/avatar_placeholder.png&apos;)&#125;</span><br><span class="line">            source=&#123;&#123; uri: </span><br><span class="line">                    &apos;http://img1.qimingpian.com/product/raw/2b7285ee83af426c321002e27247377a.jpg&apos; &#125;&#125;</span><br><span class="line">            style=&#123;&#123;width: 50, height: 50&#125;&#125;</span><br><span class="line">        /&gt;</span><br></pre></td></tr></table></figure></p>
+          <p>ReactNative中的Image使用时比较简单的，比如下面这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;Image</span><br><span class="line">            resizeMode=&apos;contain&apos;</span><br><span class="line">            defaultSource=&#123;require(&apos;images/avatar_placeholder.png&apos;)&#125;</span><br><span class="line">            source=&#123;&#123; uri: </span><br><span class="line">                    &apos;http://img1.qimingpian.com/product/raw/2b7285ee83af426c321002e27247377a.jpg&apos; &#125;&#125;</span><br><span class="line">            style=&#123;&#123;width: 50, height: 50&#125;&#125;</span><br><span class="line">        /&gt;</span><br></pre></td></tr></table></figure>
+
 <p>效果就是这样了<br><img src="https://upload-images.jianshu.io/upload_images/3112038-504d6671b0382abd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>问题来了，如果给Image设置了圆角了话，Android上就显示有问题了，<br>
+<p>问题来了，如果给Image设置了圆角了话，Android上就显示有问题了，</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/02/react-native-image/#more" rel="contents">
@@ -1746,7 +1749,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
     
     
     
@@ -1907,7 +1910,7 @@
 
       
         
-          <p>众所周知，React-Native原生的Webview的属性onShouldStartLoadWithRequest仅支持IOS平台，但是往往在开发中两端都需要进行URl的拦截，进行对应的业务需要。<br><img src="https://upload-images.jianshu.io/upload_images/3112038-dfb7c659888eb02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="webview.png"><br>通过不断学习，在<a href="https://github.com/react-native-community/react-native-webview" target="_blank" rel="noopener">https://github.com/react-native-community/react-native-webview</a> 的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需要的可以参考一下。<a href="https://github.com/wayne214/react-native-webview-crossplatform" target="_blank" rel="noopener">https://github.com/wayne214/react-native-webview-crossplatform</a>, 欢迎star,fork.<br>
+          <p>众所周知，React-Native原生的Webview的属性onShouldStartLoadWithRequest仅支持IOS平台，但是往往在开发中两端都需要进行URl的拦截，进行对应的业务需要。<br><img src="https://upload-images.jianshu.io/upload_images/3112038-dfb7c659888eb02d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="webview.png"><br>通过不断学习，在<a href="https://github.com/react-native-community/react-native-webview" target="_blank" rel="noopener">https://github.com/react-native-community/react-native-webview</a> 的基础上，整理出来一个方案，并且发布到了npm上，小伙伴们有需要的可以参考一下。<a href="https://github.com/wayne214/react-native-webview-crossplatform" target="_blank" rel="noopener">https://github.com/wayne214/react-native-webview-crossplatform</a>, 欢迎star,fork.</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/11/02/react-native-webview-crossplatform/#more" rel="contents">
@@ -1917,7 +1920,7 @@
           <!--/noindex-->
         
       
-    </p></div>
+    </div>
     
     
     
