@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[来了，来了，真的来了，ReactNative集成百度语音开源库]]></title>
+    <url>%2F2019%2F10%2F22%2F%E6%9D%A5%E4%BA%86%EF%BC%8C%E6%9D%A5%E4%BA%86%EF%BC%8C%E7%9C%9F%E7%9A%84%E6%9D%A5%E4%BA%86%EF%BC%8CReactNative%E9%9B%86%E6%88%90%E7%99%BE%E5%BA%A6%E8%AF%AD%E9%9F%B3%E5%BC%80%E6%BA%90%E5%BA%93%2F</url>
+    <content type="text"><![CDATA[笔者在之前这篇文章中ReactNative集成百度语音合成介绍了在项目中如何集成百度语音合成步骤和部分代码。今天重(you)磅(dian)推(peng)出(zhang)百度语音合成开源库# react-native-baidu-vtts ,目前只做了Android端的集成，后期补上IOS端集成，开源不易，欢迎大家star Github地址：react-native-baidu-vtts开源的初衷： 虽然能够在项目中集成，但是使用起来还是需要写Android类和js代码，相对有些繁琐 部分读者在上一篇文章反馈，按照笔者的步骤集成中出现一些问题，比较闹心 网上也有一些类似的开源库，存在如下一下问题：没有使用文档、根本就不是一个库、兼容性问题(Android机型)ReactNative集成百度语音合成文章有也有提到。 一直想开源。。。准备工作请参考ReactNative集成百度语音合成的“兵马未动粮草先行”模块安装12345npm install react-native-baidu-vtts --saveoryarn add react-native-baidu-vtts 自动添加原生依赖react-native link react-native-baidu-vtts 使用12345678910111213141516171819202122232425262728import RNBaiduvoice from &apos;react-native-baidu-vtts&apos;;// TODO: What to do with the module?class App extends Component&#123; componentDidMount() &#123; // 填写百度语音官网申请的appid, apikey, secretkey const String appid = &apos;&apos; const String apikey = &apos;&apos; const String secretkey = &apos;&apos; RNBaiduvoice.initBaiduTTS(appid,apikey,secretkey) &#125; _speechText = () =&gt; &#123; RNBaiduvoice.speak(&apos;百度语音&apos;) &#125; render() &#123; return ( &lt;View style=&#123;styles.container&#125;&gt; &#123;/*&lt;TwoList/&gt;*/&#125; &lt;TouchableOpacity onPress=&#123;this._speechText&#125;&gt; &lt;Text style=&#123;&#123;fontSize: 20, height: 30&#125;&#125;&gt;测试语音&lt;/Text&gt; &lt;/TouchableOpacity&gt; &lt;/View&gt; ); &#125;&#125; 最后欢迎关注我的公众号：君伟说， 一个有温度的公众号。]]></content>
+      <categories>
+        <category>开源软件</category>
+      </categories>
+      <tags>
+        <tag>react-native-baidu-vtts</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[开源ReactNative卡片式(Cards)组件，你值得拥有]]></title>
     <url>%2F2019%2F10%2F15%2F%E5%BC%80%E6%BA%90ReactNative%E5%8D%A1%E7%89%87%E5%BC%8F-Cards-%E7%BB%84%E4%BB%B6%EF%BC%8C%E4%BD%A0%E5%80%BC%E5%BE%97%E6%8B%A5%E6%9C%89%2F</url>
     <content type="text"><![CDATA[开源一个跨端的卡片式设计(Cards)的组件,在Android中是Material Design中有一种很个性的设计概念，在使用React-Native跨平台的开发框架中，卡片样式在IOS平台通过设置View的样式就可以实现类似的效果,比如这样： 123456789101112&lt;View style=&#123;&#123; shadowOffset: &#123; // 设置阴影偏移量 width: 0, height: 4 &#125;, shadowRadius: 4, // 设置阴影模糊半径 shadowOpacity: 0.13, // 设置阴影的不透明度 borderRadius: 10, // 设置圆角 shadowColor: &apos;rgba(96,96,96,1)&apos; // 设置阴影色 &#125; &#123;...props&#125; /&gt; 基于此，此开源组件，在IOS端即采用了RN平台提供的阴影样式属性来实现卡片样式；在Android端采用Android原生support库在V7引入的原生CardView UI组件，来实现卡片样式设计的组件​。Github项目地址： react-native-cardview-wayne 使用​：123456789101112131415161718192021import RNCardview from &apos;react-native-cardview-wayne&apos;;export default class App extends Component &#123; render() &#123; return ( &lt;CardView cardElevation=&#123;4&#125; maxCardElevation=&#123;4&#125; radius=&#123;10&#125; backgroundColor=&#123;&apos;#ffffff&apos;&#125;&gt; &lt;View style=&#123;&#123;padding:10&#125;&#125;&gt; &lt;View&gt; &lt;Text&gt;CardView for iOS and Android&lt;/Text&gt; &lt;/View&gt; &lt;View&gt; &lt;Text&gt;This is test&lt;/Text&gt; &lt;/View&gt; &lt;/View&gt; &lt;/CardView&gt; ); &#125;&#125;; 效果如下：Android： ios: 此次重造一个轮子，目的在于学习封装一个包含原生组件的ReactNative包的开发过程，并发布到npm仓库。 个人公众号：君伟说， 欢迎大家关注。]]></content>
