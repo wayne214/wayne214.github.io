@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Flutter build failed android]]></title>
+    <url>%2F2019%2F10%2F25%2FFlutterandroidbuild%2F</url>
+    <content type="text"><![CDATA[笔者作为小白入坑Flutter,在Flutter写了一个入门demo,在进行Android编译的时候报错code如下： 1Daemon: AAPT2 aapt2-3.2.1-4818971-osx Daemon #0 具体报错截图如下： 解决方案：进入项目工程的android/app/build.gradle文件，修改编译的sdk版本为28,重新编译即可。代码如下： 1compileSdkVersion 28 欢迎关注个人公众号：君伟说。个人网站：https://wayne214.github.io一个有温度的公众号，扫码关注哦。]]></content>
+      <categories>
+        <category>技术分享</category>
+      </categories>
+      <tags>
+        <tag>Flutter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[来了，来了，真的来了，ReactNative集成百度语音开源库]]></title>
     <url>%2F2019%2F10%2F22%2F%E6%9D%A5%E4%BA%86%EF%BC%8C%E6%9D%A5%E4%BA%86%EF%BC%8C%E7%9C%9F%E7%9A%84%E6%9D%A5%E4%BA%86%EF%BC%8CReactNative%E9%9B%86%E6%88%90%E7%99%BE%E5%BA%A6%E8%AF%AD%E9%9F%B3%E5%BC%80%E6%BA%90%E5%BA%93%2F</url>
     <content type="text"><![CDATA[笔者在之前这篇文章中ReactNative集成百度语音合成介绍了在项目中如何集成百度语音合成步骤和部分代码。今天重(you)磅(dian)推(peng)出(zhang)百度语音合成开源库# react-native-baidu-vtts ,目前只做了Android端的集成，后期补上IOS端集成，开源不易，欢迎大家star Github地址：react-native-baidu-vtts开源的初衷： 虽然能够在项目中集成，但是使用起来还是需要写Android类和js代码，相对有些繁琐 部分读者在上一篇文章反馈，按照笔者的步骤集成中出现一些问题，比较闹心 网上也有一些类似的开源库，存在如下一下问题：没有使用文档、根本就不是一个库、兼容性问题(Android机型)ReactNative集成百度语音合成文章有也有提到。 一直想开源。。。准备工作请参考ReactNative集成百度语音合成的“兵马未动粮草先行”模块安装12345npm install react-native-baidu-vtts --saveoryarn add react-native-baidu-vtts 自动添加原生依赖react-native link react-native-baidu-vtts 使用12345678910111213141516171819202122232425262728import RNBaiduvoice from &apos;react-native-baidu-vtts&apos;;// TODO: What to do with the module?class App extends Component&#123; componentDidMount() &#123; // 填写百度语音官网申请的appid, apikey, secretkey const String appid = &apos;&apos; const String apikey = &apos;&apos; const String secretkey = &apos;&apos; RNBaiduvoice.initBaiduTTS(appid,apikey,secretkey) &#125; _speechText = () =&gt; &#123; RNBaiduvoice.speak(&apos;百度语音&apos;) &#125; render() &#123; return ( &lt;View style=&#123;styles.container&#125;&gt; &#123;/*&lt;TwoList/&gt;*/&#125; &lt;TouchableOpacity onPress=&#123;this._speechText&#125;&gt; &lt;Text style=&#123;&#123;fontSize: 20, height: 30&#125;&#125;&gt;测试语音&lt;/Text&gt; &lt;/TouchableOpacity&gt; &lt;/View&gt; ); &#125;&#125; 最后欢迎关注我的公众号：君伟说， 一个有温度的公众号。]]></content>
