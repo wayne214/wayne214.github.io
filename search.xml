@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Androidgradle编译报错:Cause:org.jetbrains.plugins.gradle]]></title>
+    <url>%2F2019%2F11%2F06%2FAndroid%E7%BC%96%E8%AF%91%E6%8A%A5%E9%94%99%2F</url>
+    <content type="text"><![CDATA[新建了一个基于ReactNative version0.60.5的新项目，在使用Android Studio编译项目的时候build了如下错误： 1org.jetbrains.plugins.gradle.tooling.util.ModuleComponentIdentifierImpl.getModuleIdentifier() 从报错类型看是gradle的版本问题，google后发现是应该是android的IDE版本(3.1.2)太低，和项目的gradle版本无法兼容导致。项目中的版本为，通过查看/gradle/wrapper/gradle-wrapper.properties 文件中的内容，看到下面是5.4.1 12345distributionBase=GRADLE_USER_HOMEdistributionPath=wrapper/distsdistributionUrl=https\://services.gradle.org/distributions/gradle-5.4.1-all.zipzipStoreBase=GRADLE_USER_HOMEzipStorePath=wrapper/dists 考虑项目兼容问题，目前考虑降低gradle的版本，改下下面这样： 12345distributionBase=GRADLE_USER_HOMEdistributionPath=wrapper/distsdistributionUrl=https\://services.gradle.org/distributions/gradle-4.10.1-all.zipzipStoreBase=GRADLE_USER_HOMEzipStorePath=wrapper/dists 你以为这样就完事了？too young too simple.重新build就报了如下错误： 1Could not get unknown property &apos;mergeResourcesProvider&apos; for object of type com.android.build.gradle.internal.api.ApplicationVariantImpl. 怎么办？接着搞呗。进入Android根目录的build.gradle文件，修改如下： 1234567dependencies &#123; classpath(&quot;com.android.tools.build:gradle:3.4.1&quot;) // 修改上面的gradle版本成下面的： classpath(&quot;com.android.tools.build:gradle:3.3.0&quot;) // NOTE: Do not place your application dependencies here; they belong // in the individual module build.gradle files &#125; 重新build项目就ok了。 欢迎关注我的公众号：君伟说。个人博客：https://blog.csdn.net/wayne214]]></content>
+      <tags>
+        <tag>“Android”</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Flutter build failed android]]></title>
     <url>%2F2019%2F10%2F25%2FFlutterandroidbuild%2F</url>
     <content type="text"><![CDATA[笔者作为小白入坑Flutter,在Flutter写了一个入门demo,在进行Android编译的时候报错code如下： 1Daemon: AAPT2 aapt2-3.2.1-4818971-osx Daemon #0 具体报错截图如下： 解决方案：进入项目工程的android/app/build.gradle文件，修改编译的sdk版本为28,重新编译即可。代码如下： 1compileSdkVersion 28 欢迎关注个人公众号：君伟说。个人网站：https://wayne214.github.io一个有温度的公众号，扫码关注哦。]]></content>
