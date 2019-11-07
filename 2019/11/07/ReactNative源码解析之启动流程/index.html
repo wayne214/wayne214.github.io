@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="ReactNative,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="接触RN开发也快两年的时间了，期间也开发了5、6个APP了，ReactNative的版本也在快速的迭代着，今天重新出发，从源码解析一下App的启动流程，此次解析基于RN 0.60.5版本。 开始之前开始分析之前，新建一个名为RnDemo的空项目,RN版本选择0.60.5，通过查看项目的目录结构中Android部分会自动为我们生成MainActivity.java和MainApplication.j">
+<meta name="keywords" content="ReactNative">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReactNative源码解析之启动流程">
+<meta property="og:url" content="http://yoursite.com/2019/11/07/ReactNative源码解析之启动流程/index.html">
+<meta property="og:site_name" content="Code change the World">
+<meta property="og:description" content="接触RN开发也快两年的时间了，期间也开发了5、6个APP了，ReactNative的版本也在快速的迭代着，今天重新出发，从源码解析一下App的启动流程，此次解析基于RN 0.60.5版本。 开始之前开始分析之前，新建一个名为RnDemo的空项目,RN版本选择0.60.5，通过查看项目的目录结构中Android部分会自动为我们生成MainActivity.java和MainApplication.j">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/%E4%B8%AA%E4%BA%BA%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7.jpg">
+<meta property="og:updated_time" content="2019-11-07T10:28:49.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReactNative源码解析之启动流程">
+<meta name="twitter:description" content="接触RN开发也快两年的时间了，期间也开发了5、6个APP了，ReactNative的版本也在快速的迭代着，今天重新出发，从源码解析一下App的启动流程，此次解析基于RN 0.60.5版本。 开始之前开始分析之前，新建一个名为RnDemo的空项目,RN版本选择0.60.5，通过查看项目的目录结构中Android部分会自动为我们生成MainActivity.java和MainApplication.j">
+<meta name="twitter:image" content="http://yoursite.com/images/%E4%B8%AA%E4%BA%BA%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '似水流年'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/11/07/ReactNative源码解析之启动流程/">
+
+
+
+
+
+  <title>ReactNative源码解析之启动流程 | Code change the World</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?e6d614f5a82001ff41e0a1c1a6211551";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/wayne214"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Code change the World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">人、技术、职场生活</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/07/ReactNative源码解析之启动流程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Wayne214">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/个人微信公众号.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Code change the World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ReactNative源码解析之启动流程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T18:27:02+08:00">
+                2019-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/11/07/ReactNative源码解析之启动流程/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/07/ReactNative源码解析之启动流程/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/11/07/ReactNative源码解析之启动流程/" class="leancloud_visitors" data-flag-title="ReactNative源码解析之启动流程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv">阅读数
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>接触RN开发也快两年的时间了，期间也开发了5、6个APP了，ReactNative的版本也在快速的迭代着，今天重新出发，从源码解析一下App的启动流程，此次解析基于RN 0.60.5版本。</p>
+<h3 id="开始之前"><a href="#开始之前" class="headerlink" title="开始之前"></a>开始之前</h3><p>开始分析之前，新建一个名为RnDemo的空项目,RN版本选择0.60.5，通过查看项目的目录结构中Android部分会自动为我们生成MainActivity.java和MainApplication.java文件，我们的分析就从这两个文件入手。</p>
+<h3 id="Java部分，开始上传"><a href="#Java部分，开始上传" class="headerlink" title="Java部分，开始上传"></a>Java部分，开始上传</h3><p> 1.首先看一下MainApplication文件，继承Application并实现了ReactApplication接口，主要做一写RN的初始化操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class MainApplication extends Application implements ReactApplication &#123;</span><br><span class="line">  // 实现ReactApplication接口，创建ReactNativeHost成员变量，持有ReactInstanceManager实例，做一些初始化操作。</span><br><span class="line">  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) &#123;</span><br><span class="line">  // 是否开启dev调试,及一些调试工具，比如redbox(红盒)，有时我们看到的报错</span><br><span class="line">    @Override</span><br><span class="line">    public boolean getUseDeveloperSupport() &#123;</span><br><span class="line">      return BuildConfig.DEBUG;</span><br><span class="line">    &#125;</span><br><span class="line">    // 返回app需要的ReactPackage，添加需要加载的模块，这个地方就是我们在项目中添加依赖包时需要添加第三方package的地方</span><br><span class="line">    @Override</span><br><span class="line">    protected List&lt;ReactPackage&gt; getPackages() &#123;</span><br><span class="line">      @SuppressWarnings(&quot;UnnecessaryLocalVariable&quot;)</span><br><span class="line">      List&lt;ReactPackage&gt; packages = new PackageList(this).getPackages();</span><br><span class="line">      // Packages that cannot be autolinked yet can be added manually here, for example:</span><br><span class="line">      // packages.add(new MyReactNativePackage());</span><br><span class="line">      return packages;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected String getJSMainModuleName() &#123;</span><br><span class="line">      return &quot;index&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public ReactNativeHost getReactNativeHost() &#123;</span><br><span class="line">    return mReactNativeHost;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public void onCreate() &#123;</span><br><span class="line">    super.onCreate();</span><br><span class="line">   //SoLoader：加载C++底层库，准备解析JS。</span><br><span class="line">    SoLoader.init(this, /* native exopackage */ false);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2.接下来看一下MainActivity文件,继承自ReactActivity,ReactActivity作为JS页面的真正容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class MainActivity extends ReactActivity &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Returns the name of the main component registered from JavaScript.</span><br><span class="line">     * This is used to schedule rendering of the component.</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">    protected String getMainComponentName() &#123;</span><br><span class="line">       // 返回组件名，和js入口注册名字一致</span><br><span class="line">        return &quot;RnDemo&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">对应的js模块注册名字中：</span><br><span class="line">AppRegistry.registerComponent(&quot;RnDemo&quot;, () =&gt; App);</span><br></pre></td></tr></table></figure>
+
+<p>3.继续，来看一下ReactActivity来，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public abstract class ReactActivity extends AppCompatActivity</span><br><span class="line">    implements DefaultHardwareBackBtnHandler, PermissionAwareActivity &#123;</span><br><span class="line"></span><br><span class="line">  private final ReactActivityDelegate mDelegate;</span><br><span class="line"></span><br><span class="line">  protected ReactActivity() &#123;</span><br><span class="line">    mDelegate = createReactActivityDelegate();</span><br><span class="line">  &#125;</span><br><span class="line">  /**</span><br><span class="line">   * Called at construction time, override if you have a custom delegate implementation.</span><br><span class="line">   */</span><br><span class="line">  protected ReactActivityDelegate createReactActivityDelegate() &#123;</span><br><span class="line">    return new ReactActivityDelegate(this, getMainComponentName());</span><br><span class="line">  &#125;</span><br><span class="line">  ...</span><br><span class="line">  @Override</span><br><span class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">    super.onCreate(savedInstanceState);</span><br><span class="line">    mDelegate.onCreate(savedInstanceState);</span><br><span class="line">  &#125;</span><br><span class="line">  protected final ReactNativeHost getReactNativeHost() &#123;</span><br><span class="line">    return mDelegate.getReactNativeHost();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected final ReactInstanceManager getReactInstanceManager() &#123;</span><br><span class="line">    return mDelegate.getReactInstanceManager();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected final void loadApp(String appKey) &#123;</span><br><span class="line">    mDelegate.loadApp(appKey);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从以上代码可以看到，真正实现是在ReactActivityDelegate类中进行的。<br>4.继续，我们重点看一下ReactActivityDelegate中的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class ReactActivityDelegate &#123;</span><br><span class="line">  protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">//mMainComponentName就是上面ReactActivity.getMainComponentName()返回的组件名</span><br><span class="line">    String mainComponentName = getMainComponentName();</span><br><span class="line">    if (mainComponentName != null) &#123;</span><br><span class="line">// 加载app页面</span><br><span class="line">      loadApp(mainComponentName);</span><br><span class="line">    &#125;</span><br><span class="line">// 双击判断工具类</span><br><span class="line">    mDoubleTapReloadRecognizer = new DoubleTapReloadRecognizer();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  protected void loadApp(String appKey) &#123;</span><br><span class="line">// 非空判断</span><br><span class="line">    if (mReactRootView != null) &#123;</span><br><span class="line">      throw new IllegalStateException(&quot;Cannot loadApp while app is already running.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">//创建ReactRootView作为根视图,它本质上是一个FrameLayout</span><br><span class="line">    mReactRootView = createRootView();</span><br><span class="line">// 启动RN应用，并完成一些初始化设置</span><br><span class="line">    mReactRootView.startReactApplication(</span><br><span class="line">      getReactNativeHost().getReactInstanceManager(),</span><br><span class="line">      appKey,</span><br><span class="line">      getLaunchOptions());</span><br><span class="line">// 将ReactRootView作为Activity的显示view</span><br><span class="line">    getPlainActivity().setContentView(mReactRootView);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>看看ReactActivityDelegate做了那些工作：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.创建ReactRootView作为根视图</span><br><span class="line">2.startReactApplication启动RN流程</span><br><span class="line">3.将ReactRootView作为ReactActivity的内容显示view</span><br></pre></td></tr></table></figure>
+
+<p>由此看来ReactRootView是个关键，进入ReactRootView类继续看一下启动RN的startReactApplication方法，它接受三个参数:ReactInstanceManager,appName,启动的设置参数launchOptions,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">   * Schedule rendering of the react component rendered by the JS application from the given JS</span><br><span class="line">   * module (@&#123;param moduleName&#125;) using provided &#123;@param reactInstanceManager&#125; to attach to the</span><br><span class="line">   * JS context of that manager. Extra parameter &#123;@param launchOptions&#125; can be used to pass initial</span><br><span class="line">   * properties for the react component.</span><br><span class="line">   */</span><br><span class="line">  public void startReactApplication(</span><br><span class="line">      ReactInstanceManager reactInstanceManager,</span><br><span class="line">      String moduleName,</span><br><span class="line">      @Nullable Bundle initialProperties,</span><br><span class="line">      @Nullable String initialUITemplate) &#123;</span><br><span class="line">    Systrace.beginSection(TRACE_TAG_REACT_JAVA_BRIDGE, &quot;startReactApplication&quot;);</span><br><span class="line">    try &#123;</span><br><span class="line">      UiThreadUtil.assertOnUiThread();</span><br><span class="line"></span><br><span class="line">      // TODO(6788889): Use POJO instead of bundle here, apparently we can&apos;t just use WritableMap</span><br><span class="line">      // here as it may be deallocated in native after passing via JNI bridge, but we want to reuse</span><br><span class="line">      // it in the case of re-creating the catalyst instance</span><br><span class="line">      Assertions.assertCondition(</span><br><span class="line">        mReactInstanceManager == null,</span><br><span class="line">        &quot;This root view has already been attached to a catalyst instance manager&quot;);</span><br><span class="line">    // reactInstanceManage实例,管理React实例</span><br><span class="line">      mReactInstanceManager = reactInstanceManager;</span><br><span class="line">   // js注册的name,同ReactActivity.getMainComponentName()与AppRegistry.registerComponent()放回一致</span><br><span class="line">      mJSModuleName = moduleName;</span><br><span class="line">   // 是Native向JS传递的数据，以后可能由POJO代替，默认是null，需要的话要重写createReactActivityDelegate ，并重写其中getLaunchOptions方法</span><br><span class="line">      mAppProperties = initialProperties;</span><br><span class="line">      mInitialUITemplate = initialUITemplate;</span><br><span class="line"></span><br><span class="line">      if (mUseSurface) &#123;</span><br><span class="line">        // TODO initialize surface here</span><br><span class="line">      &#125;</span><br><span class="line">    // 创建RN的上下文ReactContext</span><br><span class="line">      if (!mReactInstanceManager.hasStartedCreatingInitialContext()) &#123;</span><br><span class="line">        mReactInstanceManager.createReactContextInBackground();</span><br><span class="line">      &#125;</span><br><span class="line">    //宽高计算完成后添加布局监听</span><br><span class="line">      attachToReactInstanceManager();</span><br><span class="line"></span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      Systrace.endSection(TRACE_TAG_REACT_JAVA_BRIDGE);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，进入ReactInstanceManger类看一下createReactContextInBackground方法,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">   * Trigger react context initialization asynchronously in a background async task. This enables</span><br><span class="line">   * applications to pre-load the application JS, and execute global code before</span><br><span class="line">   * &#123;@link ReactRootView&#125; is available and measured. This should only be called the first time the</span><br><span class="line">   * application is set up, which is enforced to keep developers from accidentally creating their</span><br><span class="line">   * application multiple times without realizing it.</span><br><span class="line">   *</span><br><span class="line">   * Called from UI thread.</span><br><span class="line">   */</span><br><span class="line">  @ThreadConfined(UI)</span><br><span class="line">  public void createReactContextInBackground() &#123;</span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;ReactInstanceManager.createReactContextInBackground()&quot;);</span><br><span class="line">    Assertions.assertCondition(</span><br><span class="line">        !mHasStartedCreatingInitialContext,</span><br><span class="line">        &quot;createReactContextInBackground should only be called when creating the react &quot; +</span><br><span class="line">            &quot;application for the first time. When reloading JS, e.g. from a new file, explicitly&quot; +</span><br><span class="line">            &quot;use recreateReactContextInBackground&quot;);</span><br><span class="line">    // 仅在应用首次启动是调用，防止开发人员意外的创建其他应用</span><br><span class="line">    mHasStartedCreatingInitialContext = true;</span><br><span class="line">    recreateReactContextInBackgroundInner();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>createReactContextInBackground方法仅会在首次启动时调用，重新加载(reloaded)app时，会调用recreateReactContextInBackground(),两个方法都会调用recreateReactContextInBackgroundInner(),</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">@ThreadConfined(UI)</span><br><span class="line">  private void recreateReactContextInBackgroundInner() &#123;</span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;ReactInstanceManager.recreateReactContextInBackgroundInner()&quot;);</span><br><span class="line">    PrinterHolder.getPrinter()</span><br><span class="line">        .logMessage(ReactDebugOverlayTags.RN_CORE, &quot;RNCore: recreateReactContextInBackground&quot;);</span><br><span class="line">  //UI线程</span><br><span class="line">    UiThreadUtil.assertOnUiThread();</span><br><span class="line">//开发模式，实现在线更新Bundle，晃动弹出调试菜单等功能，这一部分属于调试功能流程。</span><br><span class="line">    if (mUseDeveloperSupport &amp;&amp; mJSMainModulePath != null) &#123;</span><br><span class="line">      final DeveloperSettings devSettings = mDevSupportManager.getDevSettings();</span><br><span class="line"></span><br><span class="line">      // If remote JS debugging is enabled, load from dev server.</span><br><span class="line">      if (mDevSupportManager.hasUpToDateJSBundleInCache() &amp;&amp;</span><br><span class="line">          !devSettings.isRemoteJSDebugEnabled()) &#123;</span><br><span class="line">        // If there is a up-to-date bundle downloaded from server,</span><br><span class="line">        // with remote JS debugging disabled, always use that.</span><br><span class="line">// 调试模式，从服务器加载jsBundle</span><br><span class="line">        onJSBundleLoadedFromServer(null);</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      if (!Systrace.isTracing(TRACE_TAG_REACT_APPS | TRACE_TAG_REACT_JS_VM_CALLS)) &#123;</span><br><span class="line">// 加载服务bundle</span><br><span class="line">        if (mBundleLoader == null) &#123;</span><br><span class="line">          mDevSupportManager.handleReloadJS();</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          mDevSupportManager.isPackagerRunning(</span><br><span class="line">              new PackagerStatusCallback() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void onPackagerStatusFetched(final boolean packagerIsRunning) &#123;</span><br><span class="line">                  UiThreadUtil.runOnUiThread(</span><br><span class="line">                      new Runnable() &#123;</span><br><span class="line">                        @Override</span><br><span class="line">                        public void run() &#123;</span><br><span class="line">                          if (packagerIsRunning) &#123;</span><br><span class="line">                            mDevSupportManager.handleReloadJS();</span><br><span class="line">                          &#125; else &#123;</span><br><span class="line">                            // If dev server is down, disable the remote JS debugging.</span><br><span class="line">                            devSettings.setRemoteJSDebugEnabled(false);</span><br><span class="line">                            recreateReactContextInBackgroundFromBundleLoader();</span><br><span class="line">                          &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">                      &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        return;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    // 加载本地bundle</span><br><span class="line">    recreateReactContextInBackgroundFromBundleLoader();</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>recreateReactContextInBackgroundFromBundleLoader方法向下调用recreateReactContextInBackground方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@ThreadConfined(UI)</span><br><span class="line">  private void recreateReactContextInBackground(</span><br><span class="line">//C++和JS双向通信的中转站</span><br><span class="line">    JavaScriptExecutorFactory jsExecutorFactory,</span><br><span class="line">// bundle加载器，根据ReactNativeHost中的配置决定从哪里加载bundle文件</span><br><span class="line">    JSBundleLoader jsBundleLoader) &#123;</span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;ReactInstanceManager.recreateReactContextInBackground()&quot;);</span><br><span class="line">    UiThreadUtil.assertOnUiThread();</span><br><span class="line">    //创建ReactContextInitParams对象</span><br><span class="line">    final ReactContextInitParams initParams = new ReactContextInitParams(</span><br><span class="line">      jsExecutorFactory,</span><br><span class="line">      jsBundleLoader);</span><br><span class="line">    if (mCreateReactContextThread == null) &#123;</span><br><span class="line">  // 在newThread实例化ReactContext</span><br><span class="line">      runCreateReactContextOnNewThread(initParams);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      mPendingReactContextInitParams = initParams;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"> //runCreateReactContextOnNewThread()方法中内容</span><br><span class="line">final ReactApplicationContext reactApplicationContext =</span><br><span class="line">                      createReactContext(</span><br><span class="line">                          initParams.getJsExecutorFactory().create(),</span><br><span class="line">                          initParams.getJsBundleLoader());</span><br></pre></td></tr></table></figure>
+
+<p>在runCreateReactContextOnNewThread方法中，我们看到是ReactInstanceManager.createReactContext方法最终创建了ReactApplicationContext,我们继续看createReactContext()方法,有关此方法的2个参数：</p>
+<blockquote>
+<p>JSCJavaScriptExecutor jsExecutor：JSCJavaScriptExecutor继承于JavaScriptExecutor，当该类被加载时，它会自动去加载”reactnativejnifb.so”库，并会调用Native方<br>法initHybrid()初始化C++层RN与JSC通信的框架。<br>JSBundleLoader jsBundleLoader：缓存了JSBundle的信息，封装了上层加载JSBundle的相关接口，CatalystInstance通过其简介调用ReactBridge去加载JS文件，不同的场景会创建<br>不同的加载器，具体可以查看类JSBundleLoader。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">private ReactApplicationContext createReactContext(</span><br><span class="line">      JavaScriptExecutor jsExecutor,</span><br><span class="line">      JSBundleLoader jsBundleLoader) &#123;</span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;ReactInstanceManager.createReactContext()&quot;);</span><br><span class="line">    ReactMarker.logMarker(CREATE_REACT_CONTEXT_START, jsExecutor.getName());</span><br><span class="line">// ReactApplicationContext 是reactContext的包装类</span><br><span class="line">    final ReactApplicationContext reactContext = new ReactApplicationContext(mApplicationContext);</span><br><span class="line"></span><br><span class="line">    NativeModuleCallExceptionHandler exceptionHandler = mNativeModuleCallExceptionHandler != null</span><br><span class="line">        ? mNativeModuleCallExceptionHandler</span><br><span class="line">        : mDevSupportManager;</span><br><span class="line">    reactContext.setNativeModuleCallExceptionHandler(exceptionHandler);</span><br><span class="line">//创建JavaModule注册表Builder，用来创建JavaModule注册表，JavaModule注册表将所有的JavaModule注册到CatalystInstance中。</span><br><span class="line">    NativeModuleRegistry nativeModuleRegistry = processPackages(reactContext, mPackages, false);</span><br><span class="line">//jsExecutor、nativeModuleRegistry、nativeModuleRegistry等各种参数处理好之后，开始构建CatalystInstanceImpl实例。</span><br><span class="line">    CatalystInstanceImpl.Builder catalystInstanceBuilder = new CatalystInstanceImpl.Builder()</span><br><span class="line">      .setReactQueueConfigurationSpec(ReactQueueConfigurationSpec.createDefault())</span><br><span class="line">      .setJSExecutor(jsExecutor)// js执行通信类</span><br><span class="line">      .setRegistry(nativeModuleRegistry)//java模块注册表</span><br><span class="line">      .setJSBundleLoader(jsBundleLoader)// bundle加载器</span><br><span class="line">      .setNativeModuleCallExceptionHandler(exceptionHandler); // 异常处理器</span><br><span class="line"></span><br><span class="line">    ReactMarker.logMarker(CREATE_CATALYST_INSTANCE_START);</span><br><span class="line">    // CREATE_CATALYST_INSTANCE_END is in JSCExecutor.cpp</span><br><span class="line">    Systrace.beginSection(TRACE_TAG_REACT_JAVA_BRIDGE, &quot;createCatalystInstance&quot;);</span><br><span class="line">    final CatalystInstance catalystInstance;</span><br><span class="line">    try &#123;</span><br><span class="line">      catalystInstance = catalystInstanceBuilder.build();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">      Systrace.endSection(TRACE_TAG_REACT_JAVA_BRIDGE);</span><br><span class="line">      ReactMarker.logMarker(CREATE_CATALYST_INSTANCE_END);</span><br><span class="line">    &#125;</span><br><span class="line">    if (mJSIModulePackage != null) &#123;</span><br><span class="line">      catalystInstance.addJSIModules(mJSIModulePackage</span><br><span class="line">        .getJSIModules(reactContext, catalystInstance.getJavaScriptContextHolder()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (mBridgeIdleDebugListener != null) &#123;</span><br><span class="line">      catalystInstance.addBridgeIdleDebugListener(mBridgeIdleDebugListener);</span><br><span class="line">    &#125;</span><br><span class="line">    if (Systrace.isTracing(TRACE_TAG_REACT_APPS | TRACE_TAG_REACT_JS_VM_CALLS)) &#123;</span><br><span class="line">//调用CatalystInstanceImpl的Native方法把Java Registry转换为Json，再由C++层传送到JS层。</span><br><span class="line">      catalystInstance.setGlobalVariable(&quot;__RCTProfileIsProfiling&quot;, &quot;true&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    ReactMarker.logMarker(ReactMarkerConstants.PRE_RUN_JS_BUNDLE_START);</span><br><span class="line">    Systrace.beginSection(TRACE_TAG_REACT_JAVA_BRIDGE, &quot;runJSBundle&quot;);</span><br><span class="line">//通过CatalystInstance开始加载JS Bundle</span><br><span class="line">    catalystInstance.runJSBundle();</span><br><span class="line">    Systrace.endSection(TRACE_TAG_REACT_JAVA_BRIDGE);</span><br><span class="line">  //关联ReacContext与CatalystInstance</span><br><span class="line">    reactContext.initializeWithInstance(catalystInstance);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    return reactContext;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>createReactContext方法中用catalystInstance.runJSBundle() 来加载 JS bundle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">  public void runJSBundle() &#123;</span><br><span class="line">   ...省略代码</span><br><span class="line">    mJSBundleLoader.loadScript(CatalystInstanceImpl.this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查看loadScript方法，参数JSBundleLoaderDelegate接口的实现类CatalystInstanceImpl,我们假设调用了loadScriptFromAssets方法，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">  public void loadScriptFromAssets(AssetManager assetManager, String assetURL, boolean loadSynchronously) &#123;</span><br><span class="line">    mSourceURL = assetURL;</span><br><span class="line">    jniLoadScriptFromAssets(assetManager, assetURL, loadSynchronously);</span><br><span class="line">  &#125;</span><br><span class="line">private native void jniLoadScriptFromAssets(AssetManager assetManager, String assetURL, boolean loadSynchronously);</span><br></pre></td></tr></table></figure>
+
+<p>CatalystInstanceImpl.java最终还是调用C++层的CatalystInstanceImpl.cpp去加载JS Bundle。<br>接下来看一下CatalystInstance的实现类CatalystInstanceImpl的构造方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">private CatalystInstanceImpl(</span><br><span class="line">      final ReactQueueConfigurationSpec reactQueueConfigurationSpec,</span><br><span class="line">      final JavaScriptExecutor jsExecutor,</span><br><span class="line">      final NativeModuleRegistry nativeModuleRegistry,</span><br><span class="line">      final JSBundleLoader jsBundleLoader,</span><br><span class="line">      NativeModuleCallExceptionHandler nativeModuleCallExceptionHandler) &#123;</span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;Initializing React Xplat Bridge.&quot;);</span><br><span class="line">    Systrace.beginSection(TRACE_TAG_REACT_JAVA_BRIDGE, &quot;createCatalystInstanceImpl&quot;);</span><br><span class="line">  //Native方法，用来创建JNI相关状态，并返回mHybridData</span><br><span class="line">    mHybridData = initHybrid();</span><br><span class="line"> //RN中的三个线程：Native Modules Thread、JS Thread、UI Thread，都是通过Handler来管理的。</span><br><span class="line">    mReactQueueConfiguration = ReactQueueConfigurationImpl.create(</span><br><span class="line">        reactQueueConfigurationSpec,</span><br><span class="line">        new NativeExceptionHandler());</span><br><span class="line">    mBridgeIdleListeners = new CopyOnWriteArrayList&lt;&gt;();</span><br><span class="line">    mNativeModuleRegistry = nativeModuleRegistry;</span><br><span class="line">    mJSModuleRegistry = new JavaScriptModuleRegistry();</span><br><span class="line">    mJSBundleLoader = jsBundleLoader;</span><br><span class="line">    mNativeModuleCallExceptionHandler = nativeModuleCallExceptionHandler;</span><br><span class="line">    mNativeModulesQueueThread = mReactQueueConfiguration.getNativeModulesQueueThread();</span><br><span class="line">    mTraceListener = new JSProfilerTraceListener(this);</span><br><span class="line">    Systrace.endSection(TRACE_TAG_REACT_JAVA_BRIDGE);</span><br><span class="line"></span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;Initializing React Xplat Bridge before initializeBridge&quot;);</span><br><span class="line">    Systrace.beginSection(TRACE_TAG_REACT_JAVA_BRIDGE, &quot;initializeCxxBridge&quot;);</span><br><span class="line">//Native方法，调用initializeBridge()方法，并创建BridgeCallback实例，初始化Bridge。</span><br><span class="line">    initializeBridge(</span><br><span class="line">      new BridgeCallback(this),</span><br><span class="line">      jsExecutor,</span><br><span class="line">      mReactQueueConfiguration.getJSQueueThread(),</span><br><span class="line">      mNativeModulesQueueThread,</span><br><span class="line">      mNativeModuleRegistry.getJavaModules(this),</span><br><span class="line">      mNativeModuleRegistry.getCxxModules());</span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;Initializing React Xplat Bridge after initializeBridge&quot;);</span><br><span class="line">    Systrace.endSection(TRACE_TAG_REACT_JAVA_BRIDGE);</span><br><span class="line"></span><br><span class="line">    mJavaScriptContextHolder = new JavaScriptContextHolder(getJavaScriptContext());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//在C++层初始化通信桥ReactBridge</span><br><span class="line"> private native void initializeBridge(</span><br><span class="line">      ReactCallback callback,</span><br><span class="line">      JavaScriptExecutor jsExecutor,</span><br><span class="line">      MessageQueueThread jsQueue,</span><br><span class="line">      MessageQueueThread moduleQueue,</span><br><span class="line">      Collection&lt;JavaModuleWrapper&gt; javaModules,</span><br><span class="line">      Collection&lt;ModuleHolder&gt; cxxModules);</span><br></pre></td></tr></table></figure>
+
+<p>参数解读：</p>
+<ul>
+<li>ReactCallback:CatalystInstanceImpl的静态内部类ReactCallback，负责接口回调</li>
+<li>JavaScriptExecutor: js执行器，将js的调用传给c++层</li>
+<li>MessageQueueThread jsQueue：js线程</li>
+<li>MessageQueueThread moduleQueue： java线程</li>
+<li>javaModules： java module</li>
+<li>cxxModules: c++ module<br>好累，😀，继续，我们去c++层看一下，在项目的node_modules/react-native/ReactAndroid/src/main/jni/react/jni可以找到CatalystInstanceImpl.cpp<br>看一下CatalystInstanceImpl::jniLoadScriptFromAssets<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">void CatalystInstanceImpl::jniLoadScriptFromAssets(</span><br><span class="line">    jni::alias_ref&lt;JAssetManager::javaobject&gt; assetManager,</span><br><span class="line">    const std::string&amp; assetURL,</span><br><span class="line">    bool loadSynchronously) &#123;</span><br><span class="line">  const int kAssetsLength = 9;  // strlen(&quot;assets://&quot;);</span><br><span class="line">//获取source js Bundle的路径名，这里默认的就是index.android.bundle</span><br><span class="line">  auto sourceURL = assetURL.substr(kAssetsLength);</span><br><span class="line">//assetManager是Java层传递过来的AssetManager，调用JSLoade.cpo里的extractAssetManager()方法，extractAssetManager()再</span><br><span class="line">  //调用android/asset_manager_jni.h里的AssetManager_fromJava()方法获取AssetManager对象。</span><br><span class="line">  auto manager = extractAssetManager(assetManager);</span><br><span class="line">// 调用JSloader.cpp的loadScriptFromAssets方法，读取js Bundle里面的内容</span><br><span class="line">  auto script = loadScriptFromAssets(manager, sourceURL);</span><br><span class="line">// unbundle命令打包判断，build.gradle默认里是bundle打包方式。</span><br><span class="line">  if (JniJSModulesUnbundle::isUnbundle(manager, sourceURL)) &#123;</span><br><span class="line">    auto bundle = JniJSModulesUnbundle::fromEntryFile(manager, sourceURL);</span><br><span class="line">    auto registry = RAMBundleRegistry::singleBundleRegistry(std::move(bundle));</span><br><span class="line">    instance_-&gt;loadRAMBundle(</span><br><span class="line">      std::move(registry),</span><br><span class="line">      std::move(script),</span><br><span class="line">      sourceURL,</span><br><span class="line">      loadSynchronously);</span><br><span class="line">    return;</span><br><span class="line">  &#125; else if (Instance::isIndexedRAMBundle(&amp;script)) &#123;</span><br><span class="line">    instance_-&gt;loadRAMBundleFromString(std::move(script), sourceURL);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">//bundle命令打包走此流程，instance_是Instan.h中类的实例</span><br><span class="line">    instance_-&gt;loadScriptFromString(std::move(script), sourceURL, loadSynchronously);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>在项目node_modules/react-native/ReactCommon的cxxReact的NativeToJsBridge.cpp文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">void NativeToJsBridge::loadApplication(</span><br><span class="line">    std::unique_ptr&lt;JSModulesUnbundle&gt; unbundle,</span><br><span class="line">    std::unique_ptr&lt;const JSBigString&gt; startupScript,</span><br><span class="line">    std::string startupScriptSourceURL) &#123;</span><br><span class="line"></span><br><span class="line">  //获取一个MessageQueueThread，探后在线程中执行一个Task。</span><br><span class="line">  runOnExecutorQueue(</span><br><span class="line">      m_mainExecutorToken,</span><br><span class="line">      [unbundleWrap=folly::makeMoveWrapper(std::move(unbundle)),</span><br><span class="line">       startupScript=folly::makeMoveWrapper(std::move(startupScript)),</span><br><span class="line">       startupScriptSourceURL=std::move(startupScriptSourceURL)]</span><br><span class="line">        (JSExecutor* executor) mutable &#123;</span><br><span class="line"></span><br><span class="line">    auto unbundle = unbundleWrap.move();</span><br><span class="line">    if (unbundle) &#123;</span><br><span class="line">      executor-&gt;setJSModulesUnbundle(std::move(unbundle));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //executor从runOnExecutorQueue()返回的map中取得，与OnLoad中的JSCJavaScriptExecutorHolder对应，也与</span><br><span class="line">    //Java中的JSCJavaScriptExecutor对应。它的实例在JSIExecutor.cpp中实现。</span><br><span class="line">    executor-&gt;loadApplicationScript(std::move(*startupScript),</span><br><span class="line">                                    std::move(startupScriptSourceURL));</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line">关于unbundle命令</span><br><span class="line"></span><br><span class="line">&lt;unbundle命令，使用方式和bundle命令完全相同。unbundle命令是在bundle命令的基础上增加了一项功能，除了生成整合JS文件index.android.bundle外，还会</span><br><span class="line">生成各个单独的未整合JS文件（但会被优化），全部放在js-modules目录下，同时会生成一个名为UNBUNDLE的标识文件，一并放在其中。UNBUNDLE标识文件的前4个字节</span><br><span class="line">固定为0xFB0BD1E5，用于加载前的校验。</span><br></pre></td></tr></table></figure>
+
+<p>进入项目node_modules/react-native/ReactCommon/jsiexecutor/jsireact/JSIExecutor.cpp进一步调用JSIExecutor.cpp的loadApplicationScript()方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//解释执行JS</span><br><span class="line">runtime_-&gt;evaluateJavaScript(</span><br><span class="line">      std::make_unique&lt;BigStringBuffer&gt;(std::move(script)), sourceURL);</span><br><span class="line">  flush();</span><br></pre></td></tr></table></figure>
+
+<p>flushedQueueJS支线的是MessageQueue.js的flushedQueue()方法，此时JS已经被加载到队列中，等待Java层来驱动它。加载完JS后，返回reactApplicationContext，我们继续跟进它的实现。<br>我们回到ReactInstanceManager类的runCreateReactContextOnNewThread方法中，看到setupReactContext()方法，进入之后可以看到attachRootViewToInstance(reactRoot)方法，进入后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">private void attachRootViewToInstance(final ReactRoot reactRoot) &#123;</span><br><span class="line">    Log.d(ReactConstants.TAG, &quot;ReactInstanceManager.attachRootViewToInstance()&quot;);</span><br><span class="line">    Systrace.beginSection(TRACE_TAG_REACT_JAVA_BRIDGE, &quot;attachRootViewToInstance&quot;);</span><br><span class="line">    UIManager uiManagerModule = UIManagerHelper.getUIManager(mCurrentReactContext, reactRoot.getUIManagerType());</span><br><span class="line"></span><br><span class="line">    @Nullable Bundle initialProperties = reactRoot.getAppProperties();</span><br><span class="line">    final int rootTag = uiManagerModule.addRootView(</span><br><span class="line">      reactRoot.getRootViewGroup(),</span><br><span class="line">      initialProperties == null ?</span><br><span class="line">            new WritableNativeMap() : Arguments.fromBundle(initialProperties),</span><br><span class="line">        reactRoot.getInitialUITemplate());</span><br><span class="line">    reactRoot.setRootViewTag(rootTag);</span><br><span class="line">  // 启动入口</span><br><span class="line">    reactRoot.runApplication();</span><br><span class="line">    Systrace.beginAsyncSection(</span><br><span class="line">      TRACE_TAG_REACT_JAVA_BRIDGE,</span><br><span class="line">      &quot;pre_rootView.onAttachedToReactInstance&quot;,</span><br><span class="line">      rootTag);</span><br><span class="line">    UiThreadUtil.runOnUiThread(</span><br><span class="line">        new Runnable() &#123;</span><br><span class="line">          @Override</span><br><span class="line">          public void run() &#123;</span><br><span class="line">            Systrace.endAsyncSection(</span><br><span class="line">                TRACE_TAG_REACT_JAVA_BRIDGE, &quot;pre_rootView.onAttachedToReactInstance&quot;, rootTag);</span><br><span class="line">            reactRoot.onStage(ReactStage.ON_ATTACH_TO_INSTANCE);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    Systrace.endSection(TRACE_TAG_REACT_JAVA_BRIDGE);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>catalystInstance.getJSModule(AppRegistry.class)AppRegistry.class是JS层暴露给Java层的接口方法，它的真正实现在AppRegistry.js里，AppRegistry.js是运行所有RN应用的JS层入口，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">runApplication(appKey: string, appParameters: any): void &#123;</span><br><span class="line">    const msg =</span><br><span class="line">      &apos;Running application &quot;&apos; +</span><br><span class="line">      appKey +</span><br><span class="line">      &apos;&quot; with appParams: &apos; +</span><br><span class="line">      JSON.stringify(appParameters) +</span><br><span class="line">      &apos;. &apos; +</span><br><span class="line">      &apos;__DEV__ === &apos; +</span><br><span class="line">      String(__DEV__) +</span><br><span class="line">      &apos;, development-level warning are &apos; +</span><br><span class="line">      (__DEV__ ? &apos;ON&apos; : &apos;OFF&apos;) +</span><br><span class="line">      &apos;, performance optimizations are &apos; +</span><br><span class="line">      (__DEV__ ? &apos;OFF&apos; : &apos;ON&apos;);</span><br><span class="line">    infoLog(msg);</span><br><span class="line">    BugReporting.addSource(</span><br><span class="line">      &apos;AppRegistry.runApplication&apos; + runCount++,</span><br><span class="line">      () =&gt; msg,</span><br><span class="line">    );</span><br><span class="line">    invariant(</span><br><span class="line">      runnables[appKey] &amp;&amp; runnables[appKey].run,</span><br><span class="line">      &apos;Application &apos; +</span><br><span class="line">        appKey +</span><br><span class="line">        &apos; has not been registered.\n\n&apos; +</span><br><span class="line">        &quot;Hint: This error often happens when you&apos;re running the packager &quot; +</span><br><span class="line">        &apos;(local dev server) from a wrong folder. For example you have &apos; +</span><br><span class="line">        &apos;multiple apps and the packager is still running for the app you &apos; +</span><br><span class="line">        &apos;were working on before.\nIf this is the case, simply kill the old &apos; +</span><br><span class="line">        &apos;packager instance (e.g. close the packager terminal window) &apos; +</span><br><span class="line">        &apos;and start the packager in the correct app folder (e.g. cd into app &apos; +</span><br><span class="line">        &quot;folder and run &apos;npm start&apos;).\n\n&quot; +</span><br><span class="line">        &apos;This error can also happen due to a require() error during &apos; +</span><br><span class="line">        &apos;initialization or failure to call AppRegistry.registerComponent.\n\n&apos;,</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    SceneTracker.setActiveScene(&#123;name: appKey&#125;);</span><br><span class="line">    runnables[appKey].run(appParameters);</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+
+<p>😀，基本到这，就会去调用JS进行组件渲染，再通过Java层的UIManagerModule将JS组件转换为Android组件，最终显示在ReactRootView上，即完成启动过程。😀<br>阅读源代码还是挺耗时的事情，哈哈。</p>
+<p>同步更新至个人公众号及博客。<br>CSDN:<a href="https://blog.csdn.net/wayne214" target="_blank" rel="noopener">https://blog.csdn.net/wayne214</a><br>公众号：君伟说。<br><img src="/images/%E4%B8%AA%E4%BA%BA%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7.jpg" alt="个人微信公众号.jpg"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpeg" alt="Wayne214 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="Wayne214 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ReactNative/" rel="tag"># ReactNative</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/06/Android编译报错/" rel="next" title="Androidgradle编译报错:Cause:org.jetbrains.plugins.gradle">
+                <i class="fa fa-chevron-left"></i> Androidgradle编译报错:Cause:org.jetbrains.plugins.gradle
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC80MDY5NS8xNzIyMA=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/个人微信公众号.jpg" alt="Wayne214">
+            
+              <p class="site-author-name" itemprop="name">Wayne214</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wayne214" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:wayne214@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.jianshu.com/u/8ba7c349861d" target="_blank" title="简书">
+                      
+                        <i class="fa fa-fw fa-heartbeat"></i>简书</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/wayne214" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://juejin.im/user/58fdbbcbda2f60005dcbe47d/posts" target="_blank" title="掘金">
+                      
+                        <i class="fa fa-fw fa-spinner"></i>掘金</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://github.com" title="Github" target="_blank">Github</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.csdn.net" title="csdn" target="_blank">csdn</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://segmentfault.com" title="segmentfault" target="_blank">segmentfault</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.oschina.net" title="oschina" target="_blank">oschina</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://facebook.github.io/react-native/" title="ReactNative" target="_blank">ReactNative</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://reactjs.org" title="React" target="_blank">React</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#开始之前"><span class="nav-number">1.</span> <span class="nav-text">开始之前</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java部分，开始上传"><span class="nav-number">2.</span> <span class="nav-text">Java部分，开始上传</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wayne214</span>
+
+  
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      访客数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
+
+  
+    <span class="site-pv">
+      总访问量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'Cpn8ogH3e6KOcLxNz2vFIbjc-gzGzoHsz',
+        appKey: 'DrQGXvCVUce7jpv4L5itPE94',
+        placeholder: '😊老铁，你不想说两句吗？',
+        avatar:'wavatar',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("Cpn8ogH3e6KOcLxNz2vFIbjc-gzGzoHsz", "DrQGXvCVUce7jpv4L5itPE94");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
